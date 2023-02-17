@@ -1,0 +1,387 @@
+.iFrameDiv {
+  width: 100%;
+  height: 73vh;
+}
+
+.ButtonDiv {
+  margin: 5px 0px 10px 10px;
+  border-radius: 20px;
+}
+
+.CalendarDiv {
+  margin: 3%;
+  background: #F8F8F8;
+  padding: 2%;
+  border-radius: 10px;
+  height: 80vh;
+  overflow: auto;
+}
+
+.h3Color {
+  color: #1B428C;
+}
+
+.active {
+  border-radius: 30px !important;
+  background-color: #1B428C;
+  color: white;
+}
+
+.group2 {
+  padding: 1%;
+  border: 1px solid;
+  border-radius: 30px;
+  width: 100%;
+}
+
+.group3 {
+  width: 100%;
+}
+
+svg:hover {
+  filter: drop-shadow(0px 0px 7px rgb(0 0 0 / 0.5));
+}
+
+svg {
+  color: #1B428C;
+}
+
+.btnToday {
+  border: 1px solid #1B428C;
+  border-radius: 30px !important;
+  margin: auto;
+  color: #1B428C;
+}
+
+.btnToday:hover {
+  background-color: #1B428C;
+  color: white;
+}
+
+.NewJob {
+  border-radius: 30px !important;
+}
+
+.modal-header {
+  background-color: #1B428C;
+  color: white;
+}
+
+.cardInput {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #24428C;
+  border-radius: 0px;
+}
+
+.CardBG {
+  background-color: #eff9ff;
+  border: none;
+  width: 100%;
+}
+
+.calendarHeight {
+  height: 72vh;
+  overflow: auto;
+}
+
+.cardInput {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #24428C;
+  border-radius: 0px;
+}
+
+.SelectDiv {
+  background-color: #F2FAFF;
+  width: 100%;
+}
+
+.modal-footer {
+  justify-content: center;
+}
+
+.mdb {
+  max-width: 80%;
+}
+
+.mdb-2 {
+  max-width: 65%;
+}
+
+.ModalDateCSS{
+  position: absolute;
+  right: 2%;
+  margin-top: -0.5%;
+}
+
+.ModalHeading{
+  color: #1B428C;
+}
+
+.TechColor{
+  position: absolute;
+  margin-top: -3.4%;
+  margin-left: 20%;
+}
+
+.TechColor2{
+  position: absolute;
+  margin-top: -3.4%;
+  margin-left: 30%;
+}
+
+.Text-Tech{
+  white-space: nowrap;
+}
+
+.dot2 {
+  height: 20px;
+  width: 20px;
+  background-color: #fcec9f;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  background-color: #99ccff;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.TitleContent {
+  font-size: large;
+  color: #1B428C;
+  font-weight: 600;
+}
+
+.ContactDiv{
+  display: inline;
+}
+
+.fontsize{
+  font-size: 15px;
+}
+
+.StraightLine{
+  background-color: lightgrey;
+  height: 1px;
+}
+
+.inputCardText2 {
+  font-size: medium;
+  color: black;
+  height: auto !important;
+  font-weight: 500;
+  width: auto;
+}
+
+.inputCardTextArea2 {
+  width: 94%;
+  font-size: medium;
+  color: black;
+  max-height: 27vh;
+  font-weight: 500;
+  border: none;
+}
+
+.inputCardTextArea3 {
+  width: 94%;
+  font-size: medium;
+  color: black;
+  height: 5vh;
+  font-weight: 500;
+  border: none;
+}
+
+.anchorTag{
+  text-decoration: none;
+  color: black;
+}
+
+.inputCardText {
+  width: 91%;
+  font-size: medium;
+  color: black;
+  height: auto !important;
+  font-weight: 500;
+  border: none;
+}
+
+.SelectText {
+  font-size: medium;
+  color: black;
+  height: auto !important;
+  font-weight: 500;
+  border: none;
+}
+
+.inputCardTextArea {
+  width: 80%;
+  font-size: medium;
+  color: black;
+  height: 15vh;
+  font-weight: 500;
+  border: none;
+}
+
+.card {
+  width: 100%;
+  background-color: #E2F2FF;
+  border: none;
+  border-radius: 20px;
+}
+
+h6,
+h5 {
+  font-weight: 600 !important;
+}
+
+.cardColor {
+  color: #1B428C;
+}
+
+.inDisplay {
+  display: inline;
+  text-align: center;
+}
+
+.Card-Body-Div h6,
+p,
+#PaymentDivIDPaid,
+#PaymentDivIDUnPaid {
+  display: inline;
+  color: #1B428C;
+}
+
+#TimeDivID p,
+#CreateDate {
+  color: white !important;
+  display: inline;
+}
+
+#TechDiv p,
+h6 {
+  color: #1B428C;
+  display: inline;
+}
+
+#TotalDiv p,
+h6 {
+  color: #1B428C;
+  display: inline;
+}
+
+#PaymentDivIDPaid p,
+#CreateDate {
+  color: white !important;
+  display: inline;
+}
+
+#PaymentDivIDUnPaid p,
+#CreateDate {
+  color: white !important;
+  display: inline;
+}
+
+#PaymentDivIDPaid {
+  position: absolute;
+  right: 10%;
+  top: 31%;
+}
+
+#PaymentDivIDUnPaid {
+  position: absolute;
+  right: 10.2%;
+  top: 31%;
+}
+
+#TimeDivID {
+  background-color: #1B428C;
+  border-radius: 20px;
+  padding-left: 1%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  padding-right: 1%;
+}
+
+.TimeDiv {
+  position: absolute;
+  right: 6%;
+  top: 36%;
+}
+
+
+.card-body h5,
+img,
+#TimeDivID {
+  display: inline;
+  vertical-align: top;
+}
+
+.heightAccord {
+  height: 75vh;
+  overflow: auto !important;
+}
+
+.accordion-item {
+  border: none !important;
+}
+
+.overlayCard {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.overlayCard:hover {
+  transform: translateY(-5px);
+}
+
+.techSearch {
+  position: absolute;
+  margin-top: -4%;
+  margin-left: 2.7%;
+}
+
+.SearchTech {
+  padding: 5%;
+  width: 175%;
+  border-radius: 20px;
+  border-left-color: #F7B59D;
+  border-right-color: #A2B3CF;
+  border-top-color: #F7B59D;
+  border-bottom-color: #A2B3CF;
+  color: #6C757D;
+}
+
+.SearchTech:active {
+  padding: 5%;
+  width: 160%;
+  border-radius: 20px;
+  border-left-color: #F7B59D;
+  border-right-color: #A2B3CF;
+  border-top-color: #F7B59D;
+  border-bottom-color: #A2B3CF;
+}
+
+.DylanColor:hover{
+  background-color: #fcec9f;
+}
+
+@media (min-width: 1920px){
+  .TechColor{
+    position: absolute;
+    margin-top: -3.6%;
+    margin-left: 15%;
+  }
+  
+  .TechColor2{
+    position: absolute;
+    margin-top: -3.6%;
+    margin-left: 22%;
+  }
+}

@@ -1,0 +1,458 @@
+svg:hover {
+  filter: drop-shadow(0px 0px 7px rgb(0 0 0 / 0.5));
+}
+
+.bi {
+  color: #24428C;
+
+}
+
+.bi:hover {
+  color: #0E3358;
+}
+
+.cursor-arc {
+  cursor: pointer;
+}
+
+.down {
+  overflow: scroll;
+  height: 79vh;
+}
+
+table th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0%;
+  z-index: 1;
+}
+
+table th {
+  text-align: center;
+}
+
+table tr {
+  text-align: center;
+}
+
+.ButtonRadius{
+  border-radius: 20px
+}
+
+.btn-expend {
+  max-width: 16px;
+  box-sizing: content-box;
+  color: rgba(0, 0, 0, 0);
+  transition: max-width .2s ease;
+}
+.btn-expend.btn-xs {
+  max-width: 12px;
+}
+.btn-expend.btn-sm {
+  max-width: 14px;
+}
+.btn-expend.btn-lg {
+  max-width: 18px;
+}
+.btn-expend i {
+  color: #333;
+}
+.btn-expend.btn-link i {
+  color: #428bca;
+}
+.btn-expend.btn-primary i,
+.btn-expend.btn-success i,
+.btn-expend.btn-info i,
+.btn-expend.btn-warning i,
+.btn-expend.btn-danger i {
+  color: #fff;  
+}
+.btn-expend:hover,
+.btn-expend:focus,
+.btn-expend:active {
+  max-width: 400px;
+  transition-duration: .5s;
+}
+
+.btn {
+  margin-bottom: 5px;
+}
+
+.circularLoaderList {
+  height: 50px;
+  width: 50px;
+  margin-top: 20% !important;
+  opacity: 1;
+  background-color: transparent;
+  border: 5px solid #f3f3f3;
+  /* Light grey */
+  border-top: 5px solid #1B428C;
+  border-radius: 50%;
+}
+
+.overlayCard {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.overlayCard:hover {
+  transform: translateY(-5px);
+}
+
+.card:hover{
+  transform: translateY(-5px);
+  /* transform: scale(1.005); */
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.FilterSearch{
+  border-radius: 20px;
+  border-left-color: #F7B59D;
+  border-right-color: #A2B3CF;
+  border-top-color: #F7B59D;
+  border-bottom-color: #A2B3CF;
+  z-index: 111;
+}
+
+.ContentRow{
+  margin-top: -4.2%;
+  position: absolute;
+  width: 50%;
+  margin-left: 20% !important;
+}
+
+.JobsLength, h4, h5{
+  display: inline;
+}
+
+.Container-Div{
+  background-color: #F7FCFF;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 20px;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+h4{
+  color: #1B428C;
+  font-weight: 800;
+}
+
+h5{
+  color: #1B428C;
+  font-weight: 700;
+}
+
+h6{
+  color: #1B428C;
+  font-weight: 600;
+}
+
+p{
+  color: #1B428C;
+}
+
+.card{
+  width: 100%;
+  background-color: #E2F2FF;
+  border: none;
+  border-radius: 20px;
+}
+
+.Card-Body-Div h6, p, #PaymentDivIDPaid, #PaymentDivIDUnPaid{
+  display: inline;
+}
+
+#TimeDivID p, #CreateDate{
+  color: white !important;
+  display: inline;
+}
+
+.Svg-Margin{
+  margin-bottom: 0.3%;
+}
+
+.ArchiveDiv{
+  display: inline !important;
+}
+
+#PaymentDivIDPaid p, #CreateDate{
+  color: white !important;
+  display: inline;
+}
+
+#PaymentDivIDUnPaid p, #CreateDate{
+  color: white !important;
+  display: inline;
+}
+
+#PaymentDivIDPaid{
+  position: absolute;
+  right: 12%;
+  top: 31%;
+}
+
+#PaymentDivIDUnPaid{
+  position: absolute;
+  right: 12%;
+  top: 31%;
+}
+
+#TimeDivID{
+  background-color: #1B428C;
+  border-radius: 20px;
+  padding-left: 1%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  padding-right: 1%;
+}
+
+.TimeDiv{
+  position: absolute;
+  right: 5%;
+  top: 36%;
+}
+
+
+.card-body h5, img, #TimeDivID{
+  display: inline;
+  vertical-align: top;
+}
+
+.Edit-Div{
+  /* background-color: #C1E5FE; */
+    /* width: 8%; */
+    /* float: right; */
+    right: 2%;
+    /* border-radius: 20px; */
+    margin-top: -7.5%;
+    /* margin-right: -2%; */
+    /* height: 8vh; */
+    /* z-index: 10; */
+    position: absolute;
+}
+
+.EditDiv{
+  position: absolute;
+  right: 2%;
+  top: 17%;
+}
+
+.DuplicateDiv{
+  position: absolute;
+  right: 8%;
+  top: 36%;
+}
+
+.Time-Div{
+  float: right;
+  right: 2%;
+  margin-top: -5.5%;
+}
+
+.timep{
+  margin-top: 53%;
+  font-size: small;
+}
+
+@media only screen and (max-width: 705px) and (min-height: 558px){
+  .Edit-Div{
+    background-color: #C1E5FE;
+    width: 8%;
+    float: right;
+    right: 2%;
+    border-radius: 20px;
+    margin-top: -7.5%;
+    margin-right: -2%;
+    height: 8vh;
+    z-index: 10;
+    position: absolute;
+  }
+
+  .TimeDiv{
+    position: absolute;
+    right: 5%;
+    top: 36%;
+  }
+  
+  .Time-Div{
+    background-color: #D3E8F8;
+    width: 8%;
+    float: right;
+    right: 2%;
+    margin-top: -5.5%;
+    border-radius: 20px;
+    margin-right: -2%;
+    height: 10vh;
+    z-index: 4;
+    position: absolute;
+  }
+  
+  .timep{
+    margin-top: 53%;
+    font-size: small;
+  }
+}
+
+@media only screen and (min-width: 705px) and (min-height: 677px){
+  .Edit-Div{
+    /* background-color: #C1E5FE;
+    width: 6%;
+    float: right;
+    right: 2%;
+    border-radius: 50%;
+    margin-top: -6%;
+    margin-right: -1%;
+    height: 8vh;
+    z-index: 10;
+    position: absolute; */
+    background-color: #E2F2FF;
+  }
+  
+  .TimeDiv{
+    position: absolute;
+    right: 5%;
+    top: 36%;
+  }
+
+  .Time-Div{
+    background-color: #D3E8F8;
+    width: 8%;
+    float: right;
+    right: 2%;
+    margin-top: -5.5%;
+    border-radius: 20px;
+    margin-right: -2%;
+    height: 9vh;
+    z-index: 4;
+    position: absolute;
+  }
+  
+  .timep{
+    margin-top: 53%;
+    font-size: small;
+  }
+}
+
+@media (min-width: 1920px){
+  .ContentRow{
+    margin-top: -3.6%;
+    position: absolute;
+    width: 50%;
+    margin-left: 21% !important;
+  }
+
+  .EditDiv{
+    position: absolute;
+    right: 2%;
+    top: 17%;
+  }
+
+  .DuplicateDiv{
+    position: absolute;
+    right: 8%;
+    top: 36%;
+  }
+  
+  .Edit-Div{
+    background-color: #E2F2FF;
+    margin-top: -6%;
+    /* background-color: #C1E5FE;
+    width: 7%;
+    float: right;
+    right: 2%;
+    border-radius: 20px;
+    margin-top: -5.3%;
+    margin-right: -2%;
+    height: 6.5vh;
+    z-index: 10;
+    position: absolute; */
+  }
+  
+  .TimeDiv{
+    float: right;
+    right: 5%;
+    margin-top: 0%;
+    position: absolute;
+  }
+  
+  .timep{
+    margin-top: 42%;
+    font-size: small;
+  }
+
+  #PaymentDivIDPaid{
+    position: absolute;
+    right: 12%;
+    top: 31%;
+  }
+  
+  #PaymentDivIDUnPaid{
+    position: absolute;
+    right: 12%;
+    top: 31%;
+  }
+
+}
+
+.containerbtn {
+  text-align: center;
+}
+
+.cta {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  border: none;
+  background-color: #1B428C;
+  opacity: 0.9;
+  color: white;
+  transition: width 0.7s;
+}
+.cta:hover {
+  width: 120px;
+  transition: width 0.7s;
+}
+
+.cta i {
+  opacity: 1;
+  transition: opacity 0.5s
+}
+
+.cta:hover i {
+  opacity: 0;
+  transition: opacity 0.5s
+}
+
+.cta .button-text {
+  opacity: 0;
+  transition: opacity .5s;
+  position: absolute;
+  width: 100%;
+  left: 0;
+ }
+
+.cta:hover .button-text {
+  opacity: 1;
+  transition: opacity 0.5s
+}
+
+/*  */
+.mod{
+  height: 88vh;
+overflow: auto;
+}
+
+.modhead{
+  background-color: #1B428C;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+.modtitle{
+  color: white;
+}
+/*  */

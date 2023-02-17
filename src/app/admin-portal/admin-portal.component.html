@@ -1,0 +1,586 @@
+<ng-template #usersloading>
+  <div class="d-flex flex-row justify-content-center NGDiv">
+    <div class="circularLoaderAdmin" [@load]="usersList ? 'done' : 'load'"></div>
+  </div>
+</ng-template>
+
+<div class="container w=-100">
+  <div class="Container-Div shadow" *ngIf="usersList; else usersloading">
+    <h2 class="ms-2 mb-3">Admin Portal</h2>
+    <div>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+              aria-expanded="true" aria-controls="collapseOne">
+              Users
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body list-user-body"> 
+              <span class="mb-3">
+                <h4 class="ms-2 mb-3 JobsLength me-4 d-inline"><b>User List</b></h4>
+                <button class="btn btn-primary btn-sm d-inline mb-2 addBtn rounded-pill" (click)="addUser()"> + </button>
+              </span>
+              <div class="card mt-3 mb-3 overlayCard" *ngFor="let user of usersList">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-8">
+                      <img *ngIf="user.picture" class="rounded-circle" alt="100x100" height="30" width="30" [src]="user.picture"
+                        data-holder-rendered="true">
+                      <img *ngIf="!user.picture" class="rounded-circle" alt="100x100" height="30" width="30" src="../assets/user.png"
+                        data-holder-rendered="true">
+                      <h5 class="card-title"><b>
+                        {{user.name}}
+                      </b></h5>
+  
+                      <div id="TimeDivID">
+                        <h6 id="CreateDate">Created Date: </h6>
+                        <p>{{user.UserCreateDate | date}}</p>
+                      </div>
+  
+                      <div class="Card-Body-Div mt-2">
+                        <h6><b>Email: </b></h6>
+                        <p class="me-5">{{user.email}}</p>
+  
+                        <h6><b>User Power: </b></h6>
+                        <p class="me-5">{{user.group | titlecase }}</p>
+  
+                        <h6><b>Status: </b></h6>
+                        <p *ngIf="user.Enabled == true">Active</p>
+                        <p *ngIf="user.Enabled == false">Disable</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 d-flex flex-row-reverse align-items-center">
+  
+                      <div class="TimeDiv d-inline">
+                        <button class="btn btn-primary" (click)="enableUser(user)" *ngIf="user.Enabled == false" >Enable</button>
+                        <button class="btn btn-danger" (click)="disableUser(user)" *ngIf="user.Enabled == true">Disable</button>
+                      </div>
+  
+                      <div class="PassDiv d-inline ms-2 me-2">
+                        <svg (click)="openPassModal(user)" xmlns="http://www.w3.org/2000/svg" width="26" height="25" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                          <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                          <title>Change Password</title>
+                        </svg>
+                      </div>
+  
+                      <div class="EditDiv d-inline">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                          class="bi bi-pencil-square p-1" viewBox="0 0 16 16" (click)="editUser(user)">
+                          <path
+                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                          <path fill-rule="evenodd"
+                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            <title>Edit</title>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-body create-user-body">
+              <div class="card mt-3 mb-3">
+                <div class="card-body">
+                  <form action="" [formGroup]="userForm">
+                    <div class="row">
+                        <div class="picture">
+                          <input type="file" id="wizard-picture" class="" (change)="uploadFile($event)">
+                          <img id="frame" src="imgPreview" alt="">
+                          <i class="bi bi-camera"></i>
+                          <p class="select-img-txt">Select from Gallery</p>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col-lg-6">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">First Name</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter First Name" formControlName="firstName">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Last Name</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Last Name" formControlName="lastName">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col-lg-6">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Email</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Email" formControlName="email">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Phone Number</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Phone Number" formControlName="phone">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col-lg-6">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Temporary Password</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Temporary Password" formControlName="tempPass">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Role</label>
+                            <input class="form-check-input m-1" type="radio" name="role" id="admin" value="admin" formControlName="role">
+                            <label class="form-check-label role-label" for="flexRadioDefault1">
+                              Admin
+                            </label>
+                            <input class="form-check-input m-1" type="radio" name="role" id="user" value="user" formControlName="role">
+                            <label class="form-check-label role-label" for="flexRadioDefault2">
+                              User
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="cancelUser()">Cancel</button>
+                  <button id="SaveButton" type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" (click)="createUser()">Save <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-body edit-user-body">
+              <div class="card mt-3 mb-3">
+                <div class="card-body">
+                  <form action="" [formGroup]="userForm">
+                    <div class="row">
+                        <div class="picture">
+                          <input type="file" id="wizard-picture" class="" (change)="uploadFileEdit($event)">
+                          <img *ngIf="userData?.picture" id="frameEdit" [src]="userData?.picture" alt="">
+                          <img *ngIf="!userData?.picture" src="./assets/abstract-user-flat-1.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col-lg-6">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">First Name</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter First Name" formControlName="firstName">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Last Name</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Last Name" formControlName="lastName">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col-lg-6">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Email</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Email" formControlName="email" readonly>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Phone Number</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Phone Number" formControlName="phone">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col-lg-3">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Role</label>
+                            <input class="form-check-input m-1" type="radio" name="role" id="admin" value="admin" formControlName="role" [attr.disabled]="true">
+                            <label class="form-check-label role-label" for="flexRadioDefault1">
+                              Admin
+                            </label>
+                            <input class="form-check-input m-1" type="radio" name="role" id="user" value="user" formControlName="role" [attr.disabled]="true">
+                            <label class="form-check-label role-label" for="flexRadioDefault2">
+                              User
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="cancelUser()">Cancel</button>
+                  <button id="SaveButton" type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" (click)="updateUser()">Save <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Company
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body list-company-body">
+              <span class="mb-3">
+                <h4 class="ms-2 mb-3 JobsLength me-4 d-inline"><b>Company List</b></h4>
+                <button class="btn btn-primary btn-sm d-inline mb-2 addBtn rounded-pill" (click)="addCompany()"> + </button>
+              </span>
+              <div class="card mt-3 mb-3 overlayCard" *ngFor="let company of companiesList">
+                <div class="card-body">
+                  <div class="Card-Body-Div">
+                    <div class="row">
+                      <div class="col-lg-8">
+                        <h6 class="ms-4"><b>Company Name: </b></h6>
+                        <p>{{company.CompanyName}}</p>
+  
+                        <h6 class="ms-4"><b>Status: </b></h6>
+                        <p *ngIf="company.isActive == true">Active</p>
+                        <p *ngIf="company.isActive == false">Disable</p>
+  
+                        <h6 class="ms-4"><b>Created Date:</b></h6>
+                        <p>{{company.CreateDate | date}}</p>
+                      </div>
+                      <div class="col-lg-4">
+                        
+                        <div class="TimeDiv d-inline">
+                          <button class="btn btn-primary" (click)="enableCompany(company)" *ngIf="company.isActive == false" >Enable</button>
+                          <button class="btn btn-danger" (click)="disableCompany(company)" *ngIf="company.isActive == true">Disable</button>
+                        </div>
+  
+                        <div class="EditDiv d-inline me-3">
+                          <svg (click)="editCompany(company)" xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                            class="bi bi-pencil-square p-1" viewBox="0 0 16 16">
+                            <path
+                              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd"
+                              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                              <title>Edit</title>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-body create-company-body">
+              <span class="mb-3">
+                <h4 class="ms-2 mb-3 JobsLength me-2 d-inline">Add Company Form</h4>
+              </span>
+              <div class="card mt-3 mb-3">
+                <div class="card-body">
+                  <form action="" [formGroup]="companyForm">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Company Name</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Company Name" formControlName="CompanyName">
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </form>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="cancelCompany()">Cancel</button>
+                  <button id="SaveButton" type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" (click)="createCompany()">Save <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-body edit-company-body">
+              <span class="mb-3">
+                <h4 class="ms-2 mb-3 JobsLength me-2 d-inline">Add Company Form</h4>
+              </span>
+              <div class="card mt-3 mb-3">
+                <div class="card-body">
+                  <form action="" [formGroup]="companyForm">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Company Name</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Company Name" formControlName="CompanyName">
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </form>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="cancelCompany()">Cancel</button>
+                  <button id="SaveButton" type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" (click)="updateCompany()">Save <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Sales Type
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body list-sale-body">
+              <span class="mb-3">
+                <h4 class="ms-2 mb-3 JobsLength me-4 d-inline"><b>Sales Type List</b></h4>
+                <button class="btn btn-primary btn-sm d-inline mb-2 addBtn rounded-pill" (click)="addSale()"> + </button>
+              </span>
+              <div class="card mt-3 mb-3 overlayCard" *ngFor="let sale of salesTypeList">
+                <div class="card-body">
+                  <div class="Card-Body-Div">
+                    <div class="row">
+                      <div class="col-lg-8">
+                        <h6 class="ms-4"><b>Sales Type Name:</b> </h6>
+                        <p>{{sale.SalesTypeName}}</p>
+  
+                        <h6 class="ms-4"><b>Status:</b> </h6>
+                        <p *ngIf="sale.isActive == true">Active</p>
+                        <p *ngIf="sale.isActive == false">Disable</p>
+  
+                        <h6 class="ms-4"><b>Created Date:</b> </h6>
+                        <p>{{sale.CreateDate | date}}</p>
+  
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="TimeDiv d-inline">
+                          <button class="btn btn-primary" (click)="enableSalesType(sale)" *ngIf="sale.isActive == false" >Enable</button>
+                          <button class="btn btn-danger" (click)="disableSalesType(sale)" *ngIf="sale.isActive == true">Disable</button>
+                        </div>
+  
+                        <div class="EditDiv d-inline me-3">
+                          <svg (click)="editSale(sale)" xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                            class="bi bi-pencil-square p-1" viewBox="0 0 16 16">
+                            <path
+                              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd"
+                              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            <title>Edit</title>
+                            </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-body create-sale-body">
+              <span class="mb-3">
+                <h4 class="ms-2 mb-3 JobsLength me-2 d-inline">Add Sales Type</h4>
+              </span>
+              <div class="card mt-3 mb-3">
+                <div class="card-body">
+                  <form action="" [formGroup]="salesForm">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Sales Type Name</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Sales Type Name" formControlName="SalesTypeName">
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </form>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="cancelSale()">Cancel</button>
+                  <button id="SaveButton" type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" (click)="createSalesType()">Save <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-body edit-sale-body">
+              <span class="mb-3">
+                <h4 class="ms-2 mb-3 JobsLength me-2 d-inline">Add Sales Type</h4>
+              </span>
+              <div class="card mt-3 mb-3">
+                <div class="card-body">
+                  <form action="" [formGroup]="salesForm">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Sales Type Name</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Sales Type Name" formControlName="SalesTypeName">
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </form>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="cancelSale()">Cancel</button>
+                  <button id="SaveButton" type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" (click)="updateSalesType()">Save <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              Record Payment
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body list-record-body">
+              <span class="mb-3">
+                <h4 class="ms-2 mb-3 JobsLength me-4 d-inline"><b>Record Payment List</b></h4>
+                <button class="btn btn-primary btn-sm d-inline mb-2 addBtn rounded-pill " (click)="addRecord()"> + </button>
+              </span>
+              <div class="card mt-3 mb-3 overlayCard" *ngFor="let record of recordPaymentList">
+                <div class="card-body">
+                  <div class="Card-Body-Div">
+                    <div class="row">
+                      <div class="col-lg-8">
+                        <h6 class="ms-4"><b>Record Payment Name:</b> </h6>
+                        <p>{{record.RecordPaymentName}}</p>
+  
+                        <h6 class="ms-4"><b>Status: </b></h6>
+                        <p *ngIf="record.isActive == true">Active</p>
+                        <p *ngIf="record.isActive == false">Disable</p>
+  
+                        <h6 class="ms-4"><b>Created Date:</b></h6>
+                        <p>{{record.CreateDate | date}}</p>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="TimeDiv d-inline">
+                          <button class="btn btn-primary" (click)="enableRecordPayment(record)" *ngIf="record.isActive == false" >Enable</button>
+                          <button class="btn btn-danger" (click)="disableRecordPayment(record)" *ngIf="record.isActive == true">Disable</button>
+                        </div>
+  
+                        <div class="EditDiv d-inline me-3">
+                          <svg (click)="editRecord(record)" xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                            class="bi bi-pencil-square p-1" viewBox="0 0 16 16">
+                            <path
+                              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd"
+                              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            <title>Edit</title>
+                            </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-body create-record-body">
+              <span class="mb-3">
+                <h4 class="ms-2 mb-3 JobsLength me-2 d-inline">Add Record Payment</h4>
+              </span>
+              <div class="card mt-3 mb-3">
+                <div class="card-body">
+                  <form action="" [formGroup]="recordForm">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Payment Name</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Payment Name" formControlName="RecordPaymentName">
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </form>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="cancelRecord()">Cancel</button>
+                  <button id="SaveButton" type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" (click)="createRecordPayment()">Save <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-body edit-record-body">
+              <span class="mb-3">
+                <h4 class="ms-2 mb-3 JobsLength me-2 d-inline">Add Record Payment</h4>
+              </span>
+              <div class="card mt-3 mb-3">
+                <div class="card-body">
+                  <form action="" [formGroup]="recordForm">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card cardInput">
+                          <div class="card-body CardBG">
+                            <label class="card-title w-100">Payment Name</label>
+                            <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter Payment Name" formControlName="RecordPaymentName">
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </form>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="cancelRecord()">Cancel</button>
+                  <button id="SaveButton" type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" (click)="updateRecordPayment()">Save <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<!-- Change Password Modal -->
+<div class="modal fade" id="PassModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" [formGroup]="userForm">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card cardInput">
+                <div class="card-body CardBG">
+                  <label class="card-title w-100">New Password</label>
+                  <input type="text" class="date form-control form-control-padding card-text CardBG" placeholder="Enter New Pass" formControlName="tempPass">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="changePass()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Change Password Modal End -->

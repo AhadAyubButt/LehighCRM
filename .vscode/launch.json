@@ -1,0 +1,35 @@
+{
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "aws-sam",
+      "request": "direct-invoke",
+      "name": "src:index.create_customer (python3.8)",
+      "invokeTarget": {
+        "target": "code",
+        "projectRoot": "${workspaceFolder}/amplify/backend/function/LehighCRMFunction/src",
+        "lambdaHandler": "index.create_customer"
+      },
+      "lambda": {
+        "runtime": "python3.8",
+        "payload": {},
+        "environmentVariables": {}
+      }
+    },
+    {
+      "name": "ng serve",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "preLaunchTask": "npm: start",
+      "url": "http://localhost:4200/"
+    },
+    {
+      "name": "ng test",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "npm: test",
+      "url": "http://localhost:9876/debug.html"
+    }
+  ]
+}

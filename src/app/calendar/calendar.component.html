@@ -1,0 +1,720 @@
+<div class="techSearch">
+  <select #tech class="SearchTech" (change)="onChange(tech.value)">
+    <option value="">All Technicians</option>
+    <option *ngFor="let tech of technicianList" [value]=tech.Name>{{tech.Name}}</option>
+  </select>
+</div>
+
+<!-- <div class="TechColor">
+  <div class="TechColorDiv">
+    <span class="dot"><p class="ms-4 Text-Tech">Waqas Ahmad</p></span>
+  </div>
+</div>
+
+<div class="TechColor2">
+  <div class="TechColorDiv">
+    <span class="dot2"><p class="ms-4 Text-Tech">Dylan Pepper</p></span>
+  </div>
+</div> -->
+
+<div class="CalendarDiv">
+  <div class="container">
+    <ng-template #loading>
+      <iframe class="d-flex flex-row justify-content-center iFrameDiv" src="../../assets/data.html"></iframe>
+    </ng-template>
+
+
+    <div class="row text-start">
+      <div class="col-lg-4">
+        <h3 class="h3Color">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="btn-group group2">
+          <div class="btn" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+            <a routerLinkActive="active">
+              Month
+            </a>
+          </div>
+          <div class="btn" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+            <a [routerLinkActive]="['active']">
+              Week
+            </a>
+          </div>
+          <div class="btn" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+            <a [routerLinkActive]="['active']">
+              Day
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="btn-group group3">
+          <div class="btn" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+              class="bi bi-rewind-circle" viewBox="0 0 16 16">
+              <path
+                d="M7.729 5.055a.5.5 0 0 0-.52.038l-3.5 2.5a.5.5 0 0 0 0 .814l3.5 2.5A.5.5 0 0 0 8 10.5V8.614l3.21 2.293A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.79-.407L8 7.386V5.5a.5.5 0 0 0-.271-.445Z" />
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Z" />
+            </svg>
+          </div>
+          <div class="btn btnToday" mwlCalendarToday [(viewDate)]="viewDate">
+            Today
+          </div>
+          <div class="btn me-3" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+              class="bi bi-fast-forward-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14Zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16Z" />
+              <path
+                d="M4.271 5.055a.5.5 0 0 1 .52.038L8 7.386V5.5a.5.5 0 0 1 .79-.407l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 8 10.5V8.614l-3.21 2.293A.5.5 0 0 1 4 10.5v-5a.5.5 0 0 1 .271-.445Z" />
+            </svg>
+          </div>
+          <button class="btn float-end btn-primary NewJob" data-bs-toggle="modal" data-bs-target="#staticBackdropJob"
+            (click)="clear()">Create New Job</button>
+        </div>
+      </div>
+
+    </div>
+    <br />
+    <div *ngIf="events; else loading">
+      <div *ngIf="events.length > 0; else load">
+        <div [ngSwitch]="view">
+          <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="NewEvents"
+            [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+          </mwl-calendar-month-view>
+          <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="NewEvents"
+            [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)" (hourSegmentClicked)="hourSegmentClicked($event.date)">
+          </mwl-calendar-week-view>
+          <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="NewEvents"
+            [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+          </mwl-calendar-day-view>
+        </div>
+      </div>
+    </div>
+    <ng-template #load>
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+          (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)" (hourSegmentClicked)="hourSegmentClicked($event.date)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+          [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-day-view>
+      </div>
+    </ng-template>
+
+    <ng-template #popupload>
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="popupevents"
+          [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+          (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="popupevents"
+          [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)" (hourSegmentClicked)="hourSegmentClickedPopup($event.date)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="popupevents"
+          [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-day-view>
+      </div>
+    </ng-template>
+
+
+    <div class="modal fade" id="staticBackdropJob" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropJobLabel" aria-hidden="true">
+      <div class="modal-dialog mdb-2">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create an Event</h5>
+            <button type="button" class="btn-close btn-close-white" id="closeModal" data-bs-dismiss="modal"
+              aria-label="Close" (click)="clear()"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="accordion" id="accordionExample">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="btn btn-primary col-12" type="button" data-bs-dismiss="modal"
+                        (click)="navigateNewCustomer()">
+                        New Job
+                      </button>
+                    </h2>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="collapsed btn btn-primary col-12" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Existing Job
+                    </button>
+                  </h2>
+                </div>
+              </div>
+
+
+              <div class="accordion-item">
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body heightAccord">
+                    <div class="card mb-3 overlayCard" *ngFor="let job of listJob; let i = index;">
+                      <div class="card-body" (click)="getJob(job)">
+                        <img class="rounded-circle" alt="100x100" height="30" width="30" src="../assets/user.png"
+                          data-holder-rendered="true">
+                        <h5 class="card-title cardColor">
+                          {{job.JobData.leadName}}
+                        </h5>
+
+                        <div id="TimeDivID" class="ModalDateCSS">
+                          <h6 id="CreateDate">Created Date: </h6>
+                          <p>{{job.JobData.JobInfo.jobDate}}</p>
+                        </div>
+
+                        <div class="Card-Body-Div mt-2">
+                          <h6>Company: </h6>
+                          <p>{{job.JobData.JobInfo.company}}</p>
+
+                          <h6 class="ms-4">Sales Type: </h6>
+                          <p>{{job.JobData.JobInfo.salesType}}</p>
+
+                          <h6 class="ms-4">Technician: </h6>
+                          <p>{{job.JobData.JobInfo.technician}}</p>
+
+                          <h6 class="ms-4">Agent: </h6>
+                          <p>{{job.JobData.JobInfo.secondaryAgent}}</p>
+
+                          <h6 class="ms-4">Total: </h6>
+                          <p>{{job.JobData.total | currency }}</p>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog mdb">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create an Event</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+              (click)="clear()"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="form">
+
+              <div class="row">
+                <div class="col-lg-4">
+
+                  <h4 class="ModalHeading">Customer</h4>
+                  <div class="CustomerName mt-1">
+                    <div class="ContactDiv">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                        class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                      </svg>
+                    </div>
+                    <div class="ContactDiv">
+                      <input type="title" class="inputCardText" formControlName="title" title="required" required
+                        [readonly]="true">
+                    </div>
+                  </div>
+
+                  <div class="CustomerPhone mt-1">
+                    <div class="ContactDiv">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                        class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                          d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                      </svg>
+                    </div>
+                    <div class="ContactDiv">
+                      <a class="anchorTag" href="tel:{{jobPhoneNumber}}">{{jobPhoneNumber}}</a>
+                    </div>
+                  </div>
+
+                  <div class="CustomerAddress mt-1">
+                    <div class="ContactDiv">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                        class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                        <path
+                          d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                      </svg>
+                    </div>
+                    <div class="ContactDiv">
+                      <a class="anchorTag" target=”_blank”
+                        href="http://maps.google.com/?q={{jobAddress}}">{{jobAddress}}</a>
+                    </div>
+                  </div>
+
+                  <div class="StraightLine me-3 mt-3 mb-3"></div>
+
+                  <h4 class="ModalHeading">Technician</h4>
+                  <div class="ContactDiv">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                      class="bi bi-person-fill" viewBox="0 0 16 16">
+                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                    </svg>
+                  </div>
+                  <div class="ContactDiv">
+                    <select class="inputCardText" formControlName="agent" title="required" required>
+                      <option value="" selected>Select a Technician</option>
+                      <option *ngFor="let tech of technicianList" [value]=tech.Name>{{tech.Name}}</option>
+                    </select>
+                  </div>
+
+                  <div class="StraightLine me-3 mt-3 mb-3"></div>
+
+                  <h4 class="ModalHeading">Job Details</h4>
+                  <div class="DescriptionContent">
+                    <textarea class="inputCardTextArea" formControlName="description" [readonly]="true"></textarea>
+                  </div>
+
+                  <div class="StraightLine me-3 mt-3 mb-3"></div>
+                  <!-- <h4 class="ModalHeading">Additional Notes</h4>
+                  <div class="DescriptionContent">
+                    <textarea class="inputCardTextArea" formControlName="notes"></textarea>
+                  </div> -->
+                </div>
+
+                <div class="col-lg-8 calendarHeight">
+                  <div class="row">
+                    <div class="col-lg-4">
+
+                      <div class="TitleContent mb-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                          class="bi bi-calendar-week me-2" viewBox="0 0 16 16">
+                          <path
+                            d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                          <path
+                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                        </svg>
+                        Start Date
+                      </div>
+                      <div class="TitleContentText mb-2">
+                        <input type="title" class="inputCardText" type="datetime-local" formControlName="start">
+                      </div>
+
+                    </div>
+                    <div class="col-lg-4">
+
+                      <div class="TitleContent mb-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                          class="bi bi-calendar-week-fill me-2" viewBox="0 0 16 16">
+                          <path
+                            d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z" />
+                        </svg>
+                        End Date
+                      </div>
+                      <div class="TitleContentText mb-2">
+                        <input type="title" class="inputCardText" type="datetime-local" formControlName="end">
+                      </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="btn-group group3 mb-2">
+                        <div class="btn" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                          (viewDateChange)="closeOpenMonthViewDay()">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-rewind-circle" viewBox="0 0 16 16">
+                            <path
+                              d="M7.729 5.055a.5.5 0 0 0-.52.038l-3.5 2.5a.5.5 0 0 0 0 .814l3.5 2.5A.5.5 0 0 0 8 10.5V8.614l3.21 2.293A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.79-.407L8 7.386V5.5a.5.5 0 0 0-.271-.445Z" />
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Z" />
+                          </svg>
+                        </div>
+                        <div class="btn btnToday" mwlCalendarToday [(viewDate)]="viewDate">
+                          Today
+                        </div>
+                        <div class="btn" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                          (viewDateChange)="closeOpenMonthViewDay()">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-fast-forward-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14Zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16Z" />
+                            <path
+                              d="M4.271 5.055a.5.5 0 0 1 .52.038L8 7.386V5.5a.5.5 0 0 1 .79-.407l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 8 10.5V8.614l-3.21 2.293A.5.5 0 0 1 4 10.5v-5a.5.5 0 0 1 .271-.445Z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="popupevents; else loading">
+                    <div *ngIf="popupevents.length > 0; else popupload">
+                      <div [ngSwitch]="CalendarView.Week">
+                        <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate"
+                          [events]="popupevents" [refresh]="refresh"
+                          (eventClicked)="handleEvent('Clicked', $event.event)"
+                          (eventTimesChanged)="eventTimesChanged($event)"
+                          (hourSegmentClicked)="hourSegmentClickedPopup($event.date)">
+                        </mwl-calendar-week-view>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary NewJob col-lg-4" *ngIf="!loader"
+                (click)="saveEvent()">Submit</button>
+              <button *ngIf="loader" class="btn btn-primary btn-md col-5 NewJob" type="button" disabled>
+                <span class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span>
+                Submitting...
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="staticBackdropTime" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog mdb">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create an Event</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+              (click)="clear()"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="form">
+
+              <div class="row">
+                <div class="col-lg-4">
+
+                  <h4 class="ModalHeading">Customer</h4>
+                  <div class="CustomerName mt-1">
+                    <div class="ContactDiv">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                        class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                      </svg>
+                    </div>
+                    <div class="ContactDiv">
+                      <input type="title" class="inputCardText" formControlName="title" title="required" required
+                        [readonly]="true">
+                    </div>
+                  </div>
+
+                  <div class="CustomerPhone mt-1">
+                    <div class="ContactDiv">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                        class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                          d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                      </svg>
+                    </div>
+                    <div class="ContactDiv">
+                      <a class="anchorTag" href="tel:{{jobPhoneNumber}}">{{jobPhoneNumber}}</a>
+                    </div>
+                  </div>
+
+                  <div class="CustomerAddress mt-1">
+                    <div class="ContactDiv">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                        class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                        <path
+                          d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                      </svg>
+                    </div>
+                    <div class="ContactDiv">
+                      <a class="anchorTag" target=”_blank”
+                        href="http://maps.google.com/?q={{jobAddress}}">{{jobAddress}}</a>
+                    </div>
+                  </div>
+
+                  <div class="StraightLine me-3 mt-3 mb-3"></div>
+
+                  <h4 class="ModalHeading">Technician</h4>
+                  <div class="ContactDiv">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
+                      class="bi bi-person-fill" viewBox="0 0 16 16">
+                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                    </svg>
+                  </div>
+                  <div class="ContactDiv">
+                    <select class="inputCardText" formControlName="agent" title="required" required>
+                      <option value="" selected>Select a Technician</option>
+                      <option *ngFor="let tech of technicianList" [value]=tech.Name>{{tech.Name}}</option>
+                    </select>
+                  </div>
+
+                  <div class="StraightLine me-3 mt-3 mb-3"></div>
+
+                  <h4 class="ModalHeading">Job Details</h4>
+                  <div class="DescriptionContent">
+                    <textarea class="inputCardTextArea" formControlName="description" [readonly]="true"></textarea>
+                  </div>
+
+                  <div class="StraightLine me-3 mt-3 mb-3"></div>
+                  <!-- <h4 class="ModalHeading">Additional Notes</h4>
+                  <div class="DescriptionContent">
+                    <textarea class="inputCardTextArea" formControlName="notes"></textarea>
+                  </div> -->
+                </div>
+
+                <div class="col-lg-8 calendarHeight">
+                  <div class="row">
+                    <div class="col-lg-4">
+
+                      <div class="TitleContent mb-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                          class="bi bi-calendar-week me-2" viewBox="0 0 16 16">
+                          <path
+                            d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                          <path
+                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                        </svg>
+                        Start Date
+                      </div>
+                      <div class="TitleContentText mb-2">
+                        <input type="title" class="inputCardText" type="datetime-local" formControlName="start">
+                      </div>
+
+                    </div>
+                    <div class="col-lg-4">
+
+                      <div class="TitleContent mb-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                          class="bi bi-calendar-week-fill me-2" viewBox="0 0 16 16">
+                          <path
+                            d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z" />
+                        </svg>
+                        End Date
+                      </div>
+                      <div class="TitleContentText mb-2">
+                        <input type="title" class="inputCardText" type="datetime-local" formControlName="end">
+                      </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="btn-group group3 mb-2">
+                        <div class="btn" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                          (viewDateChange)="closeOpenMonthViewDay()">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-rewind-circle" viewBox="0 0 16 16">
+                            <path
+                              d="M7.729 5.055a.5.5 0 0 0-.52.038l-3.5 2.5a.5.5 0 0 0 0 .814l3.5 2.5A.5.5 0 0 0 8 10.5V8.614l3.21 2.293A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.79-.407L8 7.386V5.5a.5.5 0 0 0-.271-.445Z" />
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Z" />
+                          </svg>
+                        </div>
+                        <div class="btn btnToday" mwlCalendarToday [(viewDate)]="viewDate">
+                          Today
+                        </div>
+                        <div class="btn" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                          (viewDateChange)="closeOpenMonthViewDay()">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-fast-forward-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14Zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16Z" />
+                            <path
+                              d="M4.271 5.055a.5.5 0 0 1 .52.038L8 7.386V5.5a.5.5 0 0 1 .79-.407l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 8 10.5V8.614l-3.21 2.293A.5.5 0 0 1 4 10.5v-5a.5.5 0 0 1 .271-.445Z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="popupevents; else loading">
+                    <div *ngIf="popupevents.length > 0; else popupload">
+                      <div [ngSwitch]="CalendarView.Week">
+                        <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate"
+                          [events]="popupevents" [refresh]="refresh"
+                          (eventClicked)="handleEvent('Clicked', $event.event)"
+                          (eventTimesChanged)="eventTimesChanged($event)"
+                          (hourSegmentClicked)="hourSegmentClickedPopup($event.date)">
+                        </mwl-calendar-week-view>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary NewJob col-lg-4" *ngIf="!loader"
+                (click)="saveEvent()">Submit</button>
+              <button *ngIf="loader" class="btn btn-primary btn-md col-5 NewJob" type="button" disabled>
+                <span class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span>
+                Submitting...
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #modalContent let-close="close" id="hidemodal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Update Task</h5>
+        <button type="button" class="btn-close btn-close-white" (click)="close()">
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+
+          <div class="ModalForm ms-3">
+
+            <div class="TitleContent mb-1" *ngIf="form.controls['checkForm'].value == true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                class="bi bi-check2-square me-2" viewBox="0 0 16 16">
+                <path
+                  d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                <path
+                  d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+              </svg>
+              Completed
+              <input class="form-check-input float-end me-3" formControlName="checkForm" type="checkbox" value=""
+                id="defaultCheck1">
+            </div>
+            <div class="TitleContent mb-1"
+              *ngIf="form.controls['checkForm'].value == false || form.controls['checkForm'].value == ''">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                class="bi bi-check2-square me-2" viewBox="0 0 16 16">
+                <path
+                  d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                <path
+                  d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+              </svg>
+              Not Completed
+              <input class="form-check-input float-end me-3" formControlName="checkForm" type="checkbox" value=""
+                id="defaultCheck1">
+            </div>
+
+            <div class="StraightLine me-3 mt-3 mb-3"></div>
+
+            <h2 class="ModalHeading">Customer</h2>
+            
+            <div class="ContactDiv me-1 fontsize">
+              <div class="ContactDiv">
+                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
+                  class="bi bi-person-fill" viewBox="0 0 16 16">
+                  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                </svg>
+              </div>
+              <div class="ContactDiv">
+                {{ClientName}}
+              </div>
+            </div>
+
+            <div class="ContactDiv me-1 fontsize">
+              <div class="ContactDiv">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                  class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                </svg>
+              </div>
+              <div class="ContactDiv ms-1">
+                <a class="anchorTag" href="tel:{{ClientPhone}}">{{ClientPhone}}</a>
+              </div>
+            </div>
+
+            <div class="ContactDiv me-1 fontsize">
+              <div class="ContactDiv">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                  class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                </svg>
+              </div>
+              <div class="ContactDiv ms-1">
+                <a class="anchorTag" target=”_blank” href="http://maps.google.com/?q={{ClientAddress}}">{{ClientAddress}}</a>
+              </div>
+            </div>
+
+            <div class="StraightLine me-3 mt-3 mb-3"></div>
+
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="TitleContent">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
+                    class="bi bi-calendar-week me-2" viewBox="0 0 16 16">
+                    <path
+                      d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                    <path
+                      d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                  </svg>
+                  Start Date
+                </div>
+                <div class="TitleContentText mt-1 mb-4">
+                  <input type="title" class="inputCardText2" type="datetime-local" formControlName="start">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="TitleContent">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
+                    class="bi bi-calendar-week-fill me-2" viewBox="0 0 16 16">
+                    <path
+                      d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z" />
+                  </svg>
+                  End Date
+                </div>
+                <div class="TitleContentText mt-1 mb-4">
+                  <input type="title" class="inputCardText2" type="datetime-local" formControlName="end">
+                </div>
+              </div>
+            </div>
+
+            <div class="StraightLine me-3 mb-3"></div>
+
+            <h2 class="ModalHeading">Technician</h2>
+            <div class="CustomerDetails">
+              <div class="ContactDiv">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                  class="bi bi-person-fill" viewBox="0 0 16 16">
+                  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                </svg>
+              </div>
+              <div class="ContactDiv">
+                <select class="SelectText" formControlName="agent" title="required" required>
+                  <option value="" selected>Select a Technician</option>
+                  <option *ngFor="let tech of technicianList" [value]=tech.Name>{{tech.Name}}</option>
+                </select>
+                <!-- <input type="title" class="inputCardText" formControlName="agent" title="required" required> -->
+              </div>
+            </div>
+
+            <div class="StraightLine me-3 mt-3 mb-3"></div>
+
+            <h2 class="ModalHeading">Job Details</h2>
+            <div>
+              <textarea class="inputCardTextArea2" formControlName="description"></textarea>
+            </div>
+
+            <div class="StraightLine me-3 mt-3 mb-3"></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger NewJob col-lg-3" *ngIf="isAgent == true"
+          (click)="deleteEvent()">Delete</button>
+
+        <button type="button" *ngIf="!loader" class="btn btn-primary NewJob  col-lg-3"
+          (click)="updateEvent()">Update</button>
+        <button *ngIf="loader" class="btn btn-primary btn-sm col-lg-4 ButtonDiv" type="button" disabled>
+          <span class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span>
+          Updating...
+        </button>
+      </div>
+    </ng-template>
+
+
+  </div>
+</div>

@@ -1,0 +1,162 @@
+<div class="container">
+  <div class="container-fluid noborder">
+
+    <ng-template #comloading>
+      <div class="d-flex flex-row justify-content-center NGDiv">
+        <div class="circularLoader" [@load]="completedJobs ? 'done' : 'load'"></div>
+      </div>
+    </ng-template>
+
+    <ng-template #penloading>
+      <div class="d-flex flex-row justify-content-center NGDiv">
+        <div class="circularLoader" [@load]="pendingJobs ? 'done' : 'load'"></div>
+      </div>
+    </ng-template>
+
+    <ng-template #quoloading>
+      <div class="d-flex flex-row justify-content-center NGDiv">
+        <div class="circularLoader" [@load]="quoteJobs ? 'done' : 'load'"></div>
+      </div>
+    </ng-template>
+
+    <ng-template #load>
+    </ng-template>
+
+    <div class="row ContentRow">
+      <div class="col-lg-3">
+        <select class="form-select company-search" [formControl]="companyName">
+          <option value="">All</option>
+          <option *ngFor="let company of companiesList" [value]=company.CompanyName>{{company.CompanyName}}</option>
+        </select>
+      </div>
+
+      <div class="col-lg-2 MarginButtonCol">
+        <button class="btn btn-primary" (click)="searchByCompany()">Search</button>
+      </div>
+
+      <div class="col-lg-3">
+        <select class="form-select FilterSearch" [formControl]="filterDays">
+          <option value="7">Last 7 Days</option>
+          <option value="14">Last 14 Days</option>
+          <option value="30">Last 30 Days</option>
+        </select>
+      </div>
+
+      <div class="col-lg-2 MarginButtonCol">
+        <button class="btn btn-primary" (click)="getByTime()">Filter</button>
+      </div>
+    </div>
+
+    <div class="card-group fade-in">
+      <div class="card border mb-3 headers-main">
+        <div class="card-header headers">
+          <div *ngIf="lenComp >= 0" class="badge bg-info headers-badge">{{lenComp}}
+          </div>
+          Completed Jobs
+        </div>
+        <div class="card-body headers-body" *ngIf="completedJobs; else comloading">
+          <div class="" *ngIf="completedJobs.length > 0; else load">
+            <div class="card border-0 shadow mb-3 overlay dashboard-inner-card" (click)="getJob(f)"
+              *ngFor="let f of completedJobs">
+              <div class="card-body">
+                <div class="row align-items-center h-100">
+                  <div class="col-lg-6 mx-auto">
+                    <div class="jumbotron">
+                      <h5>
+                        {{ f.JobData.leadName }}
+                      </h5>
+                      <h6><b>Total:</b> {{ f.JobData.total | currency }}</h6>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 ColDiv6">
+                    <h6>Job Date</h6>
+                    <p>{{ f.JobData.JobInfo.jobDate | date }}</p>
+                    <h6>Agent</h6>
+                    <p>{{f.JobData.JobInfo.secondaryAgent}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card border mb-3 headers-main">
+        <div class="card-header headers">
+          <div *ngIf="lenComp >= 0" class="badge bg-info headers-badge">{{lenPen}}
+          </div>
+          Pending Jobs
+          <div *ngIf="lenPen >= 0" class="badge bg-info headers-badge">${{amoPen | number}}
+          </div>
+        </div>
+
+        <!--note:Pending Leads-->
+        <div class="card-body headers-body" *ngIf="pendingJobs; else penloading">
+          <div class="" *ngIf="pendingJobs!.length > 0; else load">
+            <div class="card border-0 shadow mb-3 overlay dashboard-inner-card" (click)="getJob(f)"
+              *ngFor="let f of pendingJobs">
+              <div class="card-body">
+                <div class="row align-items-center h-100">
+                  <div class="col-lg-6 mx-auto">
+                    <div class="jumbotron">
+                      <h5>
+                        {{ f.JobData.leadName }}
+                      </h5>
+                      <h6><b>Total:</b> {{ f.JobData.total | currency }}</h6>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 ColDiv6">
+                    <h6>Job Date</h6>
+                    <p>{{ f.JobData.JobInfo.jobDate| date }}</p>
+                    <h6>Agent</h6>
+                    <p>{{f.JobData.JobInfo.secondaryAgent}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card border mb-3 headers-main">
+        <div class="card-header headers">
+          <div *ngIf="lenComp >= 0" class="badge bg-info headers-badge">{{lenQuo}}
+          </div>
+          Quotations
+          <div *ngIf="lenQuo >= 0" class="badge bg-info headers-badge">${{amoQuo | number}}
+          </div>
+        </div>
+
+        <!--note:Quoted Prices-->
+        <div class="card-body headers-body" *ngIf="quoteJobs; else quoloading">
+          <div class="" *ngIf="quoteJobs!.length > 0; else load">
+            <div class="card border-0 shadow mb-3 overlay dashboard-inner-card" (click)="getJob(f)"
+              *ngFor="let f of quoteJobs">
+              <div class="card-body">
+                <div class="row align-items-center h-100">
+                  <div class="col-lg-6 mx-auto">
+                    <div class="jumbotron">
+                      <h5>
+                        {{ f.JobData.leadName }}
+                      </h5>
+                      <h6><b>Total:</b> {{ f.JobData.total | currency }}</h6>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 ColDiv6">
+                    <h6>Created Date</h6>
+                    <p>{{ f.JobData.CreateDate| date }}</p>
+                    <h6>Agent</h6>
+                    <p>{{f.JobData.JobInfo.secondaryAgent}}</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+a {
+  color: black;
+  width: 106.5%;
+  border-radius: 20px 0 0 20px;
+
+}
+
+a:hover {
+  background: #f69b1d;
+  background-color: #1B428C !important;
+  color: #ffffff;
+  color: white !important;
+  border-radius: 20px 0 0 20px;
+}
+
+.active {
+  background-color: #f69b1d;
+  background-color: #1B428C !important;
+  color: white !important;
+  fill: #1B428C;
+  border-radius: 20px 0 0 20px;
+}
+
+.act-2:hover {
+  fill: white;
+  stroke: #174067;
+
+}
+
+svg.ico {
+  width: 20px;
+  height: 20px;
+  margin-right: 15px !important;
+}
+
+.move-right {
+  opacity: 1;
+  animation-name: moveRightOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.8s;
+
+}
+
+@keyframes moveRightOpacity {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.SideNavTopDiv {
+  width: 280px;
+  height: 100vh;
+  background-color: #dddada;
+  background-color: #F0F9FE !important;
+  /* background-image: linear-gradient(to right, white, #EFF9FF) !important; */
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.SideNavP {
+  font-size: 14px;
+  color: black;
+}
+
+.SideNavPG {
+  font-size: 12px;
+  color: black;
+  margin-top: -5%;
+}
+
+.a {
+  text-decoration: none;
+}
+
+li {
+  cursor: pointer;
+}

@@ -1,0 +1,683 @@
+<div class="container w=-100">
+  <div class="Container-Div shadow">
+    <h2 class="ms-2 mb-3">Post a Job</h2>
+    <div class="Lead-Info">
+      <h4 class="LeadHeading p-1">Lead Information</h4>
+    </div>
+    <form [formGroup]="jobForm" class="FormMargin">
+      <div class="row">
+        <div class="col-lg-6 ColPortion">
+          <h5>
+            <b>ID: {{jobID}}</b>
+          </h5>
+          <h5 *ngIf="CustomerData?.CustomerData?.lastName">
+            <b>{{CustomerData.CustomerData.firstName}} {{CustomerData.CustomerData.lastName}}</b>
+          </h5>
+          <h5 *ngIf="!CustomerData?.CustomerData?.lastName">
+            <b>{{CustomerData.CustomerData.firstName}}</b>
+          </h5>
+          <div class="PhoneNumber">
+            <svg id="Phone" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+            </svg>
+            <p id="PhoneP" class="ms-2" *ngIf="CustomerData.CustomerData.phone">
+              {{CustomerData.CustomerData.phone}}
+            </p>
+            <p id="PhoneP" class="ms-2" *ngIf="!CustomerData.CustomerData.phone"> - </p>
+          </div>
+          <div class="Email mt-1">
+            <svg id="Email" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+              <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+            </svg>
+            <p id="EmailP" class="ms-2 mt-1" *ngIf="CustomerData.CustomerData.email">
+              {{CustomerData.CustomerData.email}}
+            </p>
+            <p id="EmailP" class="ms-2 mt-1" *ngIf="!CustomerData.CustomerData.email"> - </p>
+          </div>
+          <div class="Location mt-1">
+            <svg id="Location" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+              <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+            </svg>
+            <select id="LocationP" class="card-text noborder ms-2 mt-1 SelectBGAddress" placeholder="Enter Lead Source" formControlName="jobAddress">
+              <option value={{address}} *ngFor="let address of addressArray">{{address}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card card-Border">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <h6 class="PAgent">{{ CustomerData.CustomerData.Agent }}</h6>
+                    </div>
+                    <div class="col-lg-6 PAgentDivCol">
+                      <div class="PAgentDiv">
+                        <p class="PAgentP">Primary Agent</p>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row RowTop">
+                    <div class="col-lg-6">
+                      <h6 class="SAgent">{{ authAgentName }}</h6>
+                    </div>
+                    <div class="col-lg-6 SAgentDivCol">
+                      <div class="SAgentDiv">
+                        <p class="SAgentP">Secondary Agent</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="TAmount">Total Amount: </p>
+                  <h4 class="TAmountP">${{totalAmount}}</h4>
+                </div>
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <h6 class="StatusH">Status: </h6>
+                    </div>
+                    <div class="col-lg-6 ColMargin" [formGroup]="jobForm">
+                      <select class="card-text noborder SelectDiv" placeholder="Enter Lead Source" formControlName="paymentStatusType">
+                        <option value="UNPAID">Unpaid</option>
+                        <option value="PARTIALLY PAID">Partially Paid</option>
+                        <option value="PAID">Paid</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-8">
+                      <h5 class="JobMargin">Job Type: </h5>
+                    </div>
+                    <div class="col-lg-4"></div>
+                  </div>
+                  <div class="row" [formGroup]="jobForm">
+                    <div class="col-lg-8">
+                      <div class="btn-container d-flex justify-content-center Margin-Left">
+                        <label class="switch btn-color-mode-switch">
+                          <input type="checkbox" id="color_mode" formControlName="paymentStatus">
+                          <label for="color_mode" data-on="Sales" data-off="Quote" class="btn-color-mode-switch-inner"></label>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="Buttons-Accordians mt-3 mb-3">
+          <h2 class="accordion-header AccordianDivButtons">
+            <button class="accordion-button inDisplay" style="outline: none;" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Job Information </button>
+            <button class="accordion-button collapsed inDisplay" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> Invoice </button>
+            <button (click)="openModal2()" class="accordion-button collapsed inDisplay" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Record Payment </button>
+            <button class="accordion-button collapsed inDisplay" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" id="CFour"> Notes </button>
+            <button class="accordion-button collapsed inDisplay" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"> Attachment </button>
+          </h2>
+        </div>
+        <div class="accordion mt-4 ACDiv" id="accordionExample">
+          <form [formGroup]="jobForm" class="FormMargin">
+            <div class="accordion-item">
+              <!-- Job Information Div -->
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body" [formGroup]="jobInfo">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="card cardInput" [ngClass]="{ 'is-invalid': submitted && f?.get(['company'])?.errors }">
+                        <div class="card-body CardBG">
+                          <label class="card-title">Company <span *ngIf="submitted && f?.get(['company'])?.errors" class="float-end" [ngStyle]="{
+                                      color: f?.get(['company'])?.errors ? 'red' : 'none',
+                                      'font-size': f?.get(['company'])?.errors ? '12px' : '10px'
+                                    }">
+                              <i class="bi bi-exclamation-circle bounce" title="Required"></i>
+                            </span>
+                          </label>
+                          <select class="card-text noborder SelectDiv" placeholder="Enter Lead Source" formControlName="company">
+                            <option value="">Select an option</option>
+                            <option value="Lehigh HVAC" selected>Lehigh HVAC</option>
+                            <option value="Lehigh Appliance Repair">Lehigh Appliance Repair</option>
+                            <option value="Lehigh Construction">Lehigh Construction</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="card cardInput" [ngClass]="{ 'is-invalid': submitted && f?.get(['salesType'])?.errors }">
+                        <div class="card-body CardBG">
+                          <label class="card-title w-100">Service Type <span *ngIf="submitted && f?.get(['salesType'])?.errors" class="float-end" [ngStyle]="{
+                                      color: f?.get(['salesType'])?.errors ? 'red' : 'none',
+                                      'font-size': f?.get(['salesType'])?.errors ? '12px' : '10px'
+                                    }">
+                              <i class="bi bi-exclamation-circle bounce" title="Required"></i>
+                            </span>
+                          </label>
+                          <select class="card-text noborder SelectDiv" placeholder="Enter Lead Source" formControlName="salesType">
+                            <option value="">Select an option</option>
+                            <option *ngFor="let sale of salesTypeList" [value]=sale.SalesTypeName>{{sale.SalesTypeName}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="card cardInput" [ngClass]="{ 'is-invalid': submitted && f?.get(['technician'])?.errors }">
+                        <div class="card-body CardBG">
+                          <label class="card-title w-100">Techanican <span *ngIf="submitted && f?.get(['technician'])?.errors" class="float-end" [ngStyle]="{
+                                color: f?.get(['technician'])?.errors ? 'red' : 'none',
+                                'font-size': f?.get(['technician'])?.errors ? '12px' : '10px'
+                              }">
+                              <i class="bi bi-exclamation-circle bounce" title="Required"></i>
+                            </span>
+                          </label>
+                          <select class="card-text noborder SelectDiv" placeholder="Enter Lead Source" formControlName="technician">
+                            <option value="">Select an option</option>
+                            <option *ngFor="let tech of technicianList" [value]=tech.Name>{{tech.Name}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="card cardInput">
+                        <div class="card-body CardBG">
+                          <label class="card-title w-100">Job Date</label>
+                          <input type="date" class="date form-control form-control-padding card-text CardBG" formControlName="jobDate">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="Cancel()">Cancel</button>
+                  <button type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Next</button>
+                </div>
+              </div>
+              <!-- Job Information Div End -->
+            </div>
+            <div class="accordion-item" formArrayName="ProductPayment">
+              <!-- Invoice Section -->
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="" *ngFor="let paymentForm of productPayment.controls; let i = index">
+                    <div class="row mb-4 RowWidth" [formGroupName]="i">
+                      <div class="col-lg-6">
+                        <div class="card cardInput" [ngClass]="{ 'is-invalid': invoiceCreated && paymentForm?.get(['lineItem'])?.invalid}">
+                          <div class="card-body CardBG">
+                            <label class="card-title">Line Item <span *ngIf="invoiceCreated && paymentForm?.get(['lineItem'])?.invalid" class="float-end" [ngStyle]="{
+                                  color: paymentForm?.get(['lineItem'])?.invalid ? 'red' : 'none',
+                                  'font-size': paymentForm?.get(['lineItem'])?.invalid ? '12px' : '10px'
+                                }">
+                                <i class="bi bi-exclamation-circle bounce" title="Required"></i>
+                              </span>
+                            </label>
+                            <input class="card-text SelectDiv" placeholder="Enter Line Item" maxlength="87" formControlName="lineItem">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 RateWidth">
+                        <div class="card cardInput" [ngClass]="{ 'is-invalid': invoiceCreated && paymentForm?.get(['rate'])?.invalid}">
+                          <div class="card-body CardBG">
+                            <label class="card-title">Rate <span *ngIf="invoiceCreated && paymentForm?.get(['rate'])?.invalid" class="float-end" [ngStyle]="{
+                                  color: paymentForm?.get(['rate'])?.invalid ? 'red' : 'none',
+                                  'font-size': paymentForm?.get(['rate'])?.invalid ? '12px' : '10px'
+                                }">
+                                <i class="bi bi-exclamation-circle bounce" title="Required"></i>
+                              </span>
+                            </label>
+                            <input class="card-text SelectDiv" placeholder="0" type="number" formControlName="rate">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="card cardInput" [ngClass]="{ 'is-invalid': invoiceCreated && paymentForm?.get(['quantity'])?.invalid}">
+                          <div class="card-body CardBG">
+                            <label class="card-title">Quantity <span *ngIf="invoiceCreated && paymentForm?.get(['quantity'])?.invalid" class="float-end" [ngStyle]="{
+                                  color: paymentForm?.get(['quantity'])?.invalid ? 'red' : 'none',
+                                  'font-size': paymentForm?.get(['quantity'])?.invalid ? '12px' : '10px'
+                                }">
+                                <i class="bi bi-exclamation-circle bounce" title="Required"></i>
+                              </span>
+                            </label>
+                            <input class="card-text SelectDiv" placeholder="0" type="number" formControlName="quantity">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-1 Col-Width">
+                        <div class="card cardBlue">
+                          <div class="card-body CardBlueBG">
+                            <label class="card-title WhiteText">Line Total</label>
+                            <p class="card-text SelectBlue">
+                              {{ paymentForm.controls["rate"]?.value * paymentForm.controls["quantity"]?.value | currency }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-1 d-flex flex-row justify-content-center align-items-center BtnCol">
+                        <button type="button" class="btn btn-secondary bulge rounded-circle d-flex flex-row justify-content-center align-items-center mb-3 ButtonStyle" (click)="select_modal_del(i)">
+                          <i class="bi bi-dash warning"></i>
+                        </button>
+                      </div>
+                      <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Alert</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">Are you sure you want to delete line item?</div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteProductPaymentItem()"> Ok </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row ms-0 Row-Width" [formGroup]="jobForm">
+                    <!-- Second Row -->
+                    <div class="card col-lg-2 DivHeight">
+                      <div class="card-body row PaddingZero">
+                        <div class="col-lg-6 CardBlueBG PaddingZero d-flex flex-row justify-content-center align-items-center">
+                          <span class="form-control card-text CardBlueBG FontSmall">
+                            <b>Mark Up:</b>
+                          </span>
+                        </div>
+                        <div class="col-lg-6 PaddingZero d-flex flex-row justify-content-center align-items-center BlueBorder">
+                          <input class="form-control card-text BlueInput FontSmall" placeholder="Amount" type="number" formControlName="markUp">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card col-lg-3 ms-2 DivHeight">
+                      <div class="card-body row PaddingZero">
+                        <div class="col-lg-6 CardBlueBG PaddingZero d-flex flex-row justify-content-center align-items-center">
+                          <span class="form-control card-text CardBlueBG FontSmall">
+                            <b>Labour Cost:</b>
+                          </span>
+                        </div>
+                        <div class="col-lg-6 PaddingZero d-flex flex-row justify-content-center align-items-center BlueBorder">
+                          <input class="form-control card-text BlueInput FontSmall" placeholder="Amount" type="number" formControlName="labourCost">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-1 Col-Width">
+                      <div class="card cardBlue DivHeight">
+                        <div class="card-body CardBlueBG DivHeight">
+                          <label class="card-title WhiteText">Sub Total</label>
+                          <p class="card-text SelectBlue"> ${{subTotal}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card col-lg-3 DivHeight">
+                      <div class="card-body row PaddingZero">
+                        <div class="col-lg-6 CardBlueBG PaddingZero d-flex flex-row justify-content-center align-items-center">
+                          <span class="form-control card-text CardBlueBG FontSmall" *ngIf="checkForm.value == true">
+                            <b>Discount in %</b>
+                          </span>
+                          <span class="form-control card-text CardBlueBG FontSmall" *ngIf="checkForm.value == null || checkForm.value == false">
+                            <b>Discount in $</b>
+                          </span>
+                          <div class="form-check form-switch card-title DivCard ms-1 mt-2">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" [formControl]="checkForm">
+                          </div>
+                        </div>
+                        <div class="col-lg-6 PaddingZero d-flex flex-row justify-content-center align-items-center BlueBorder">
+                          <input class="form-control card-text BlueInput FontSmall" placeholder="Enter Value" type="number" formControlName="discount">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-1 Col-Width">
+                      <div class="card cardBlue DivHeight">
+                        <div class="card-body CardBlueBG DivHeight">
+                          <label class="card-title WhiteText">Total</label>
+                          <p class="card-text SelectBlue">${{totalAmount}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="Cancel()">Cancel</button>
+                  <button type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" (click)="openModal2()">Next</button>
+                  <button class="ms-3 btn btn-primary NextBTN mt-4 col-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Additional Notes </button>
+                  <button *ngIf="invoiceCreated" type="submit" class="btn btn-primary NextBTN mt-4 col-2 float-end me-3" (click)="showInvoice()"> Preview Invoice </button>
+                  <button type="submit" class="btn btn-primary NextBTN mt-4 col-2 float-end me-3" [ngClass]="{ 'col-2': !loader, 'col-3': loader }" (click)="createInvoice()"> Create Invoice <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-primary NextBTN mt-4 col-2 float-end me-3" [disabled]="productPayment.length == 10" (click)="addProductPaymentItem()"> Add New Line Item </button>
+                  <div class="collapse mt-3" id="collapseExample" [formGroup]="jobForm">
+                    <div class="card cardInput">
+                      <div class="card-body w-100 CardBG">
+                        <label class="card-title">Additional Invoice Notes</label>
+                        <br />
+                        <textarea name="" id="" rows="5" class="card-text w-100 CardBG txtArea p-2" placeholder="Enter Notes" formControlName="lineItemNotes" maxlength="400"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Invoice Section End -->
+            </div>
+            <div class="accordion-item">
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div *ngIf="isPayment == true">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="200px" width="30" height="30" viewBox="0 0 48 48" style=" fill:#000000; margin-top: -0.3%;">
+                      <path fill="#c8e6c9" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path>
+                      <path fill="#4caf50"d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"></path>
+                    </svg>
+                    Amount Paid ${{jobForm.controls['paymentAmount'].value}} by {{jobForm.controls['paymentType'].value}}
+                  </div>
+                  
+                  <div *ngIf="isPayment == true">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="26" viewBox="0 0 512 512"
+                    style=" fill:#000000; margin-top: -0.3%;">
+                    <path fill="#E04F5F"
+                      d="M504.1,256C504.1,119,393,7.9,256,7.9C119,7.9,7.9,119,7.9,256C7.9,393,119,504.1,256,504.1C393,504.1,504.1,393,504.1,256z">
+                    </path>
+                    <path fill="#FFF"
+                      d="M285,256l72.5-84.2c7.9-9.2,6.9-23-2.3-31c-9.2-7.9-23-6.9-30.9,2.3L256,222.4l-68.2-79.2c-7.9-9.2-21.8-10.2-31-2.3c-9.2,7.9-10.2,21.8-2.3,31L227,256l-72.5,84.2c-7.9,9.2-6.9,23,2.3,31c4.1,3.6,9.2,5.3,14.3,5.3c6.2,0,12.3-2.6,16.6-7.6l68.2-79.2l68.2,79.2c4.3,5,10.5,7.6,16.6,7.6c5.1,0,10.2-1.7,14.3-5.3c9.2-7.9,10.2-21.8,2.3-31L285,256z">
+                    </path>
+                  </svg>
+                  Amount Left ${{jobForm.controls['paymentAmountLeft'].value}}
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="row">
+                    <div class="col-lg-12 ColDiv4">
+                      <div class="card cardInput">
+                        <div class="card-body w-100 CardBG">
+                          <label class="card-title">Additional Notes</label>
+                          <br />
+                          <textarea name="" id="" rows="5" class="card-text w-100 CardBG txtArea p-2" placeholder="Enter Notes" formControlName="Description"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="Cancel()">Cancel</button>
+                  <button type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">Next</button>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="row mt-2">
+                    <div class="col-lg-12 ColDiv4">
+                      <div class="card cardInput">
+                        <div class="card-body w-100 CardBG">
+                          <ngx-dropzone (change)="onSelect($event)">
+                            <ngx-dropzone-label>Drop your files here.</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                          </ngx-dropzone>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary CancelBTN mt-4 col-1" (click)="Cancel()">Cancel</button>
+                  <button id="SaveButton" type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-1" *ngIf="(jobForm.get(['paymentStatusType'])?.value == true && jobForm.get(['paymentType'])?.value != '') || jobForm.get(['paymentStatusType'])?.value != true" (click)="openModal()">Save</button>
+                  <button *ngIf="jobForm.get(['paymentStatusType'])?.value == true && jobForm.get(['paymentType'])?.value == ''" disabled class="ms-3 btn btn-primary NextBTN mt-4 col-1"> Save </button>
+                  <span class="float-end me-2" style="color: red;" *ngIf="(f?.invalid ||  productPayment.invalid) && submitted">Please fill the form correctly.</span>
+                  <span class="float-end me-2 warning" *ngIf="jobForm.get(['paymentStatus'])?.value == 'PAID' && jobForm.get(['paymentType'])?.value == ''">Please select payment method.</span>
+                  <button type="button" class="ms-3 btn btn-primary NextBTN mt-4 col-3" [disabled]="!jobstatus" (click)="addJobToCalendar()"> Add this job in calendar </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="staticBackdropPay" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Choose a payment method</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" [formGroup]="jobForm">
+        <p class="warning" *ngIf="productPayment.invalid">Please fill the payment form first.</p>
+        <p class="warning" *ngIf="jobForm.get(['paymentStatus'])?.value == '' && productPayment.valid">Select the Payment status</p>
+        <select class="form-select" aria-label="Default select example" formControlName="paymentType">
+          <option value="" selected>Open this select menu</option>
+          <option value="Cash">Cash</option>
+          <option value="Cheque">Cheque</option>
+          <option value="Card">Card</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="invoiceCreated" type="submit" class="btn btn-primary btn-sm float-end ButtonRadius" (click)="showInvoice()"> Preview Invoice </button>
+        <button type="submit" class="btn btn-primary btn-sm float-end ButtonRadius" [ngClass]="{ 'col-3': !loader, 'col-4': loader }" (click)="createInvoice()"> Create Invoice <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Record Payment Modal -->
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content MarginModal">
+      <div class="modal-header CardBlueBG">
+        <h5 class="modal-title CardBlueBG" id="exampleModalLabel">Record Payment</h5>
+        <button type="button" id="close-modal" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ModalPadding">
+        <div class="row" [formGroup]="jobForm">
+          <div class="col-lg-12">
+            <div class="card cardInput">
+              <div class="card-body CardBG">
+                <label class="card-title">
+                  <b>Payment:</b>
+                </label>
+                <select class="card-text noborder SelectDiv" placeholder="Payment Status" formControlName="paymentType">
+                  <option value="" selected>Select an option</option>
+                  <option *ngFor="let record of recordPaymentList" [value]=record.RecordPaymentName>
+                    {{record.RecordPaymentName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary NextBTN col-3" data-bs-dismiss="modal" (click)="closeModal()">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Submit Modal -->
+<div class="modal fade ButtonRadius" id="staticBackdropSubmit" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Alert</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">Are you sure you want to submit job?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm col-2" data-bs-dismiss="modal"> Close </button>
+        <button type="button" class="btn btn-success btn-sm col-3" (click)="submitJob()"> Submit <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal ends-->
+
+<!-- Cheque Payment Modal start-->
+<div class="modal fade" id="ChequePaymentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog payment-modal-dialog">
+    <div class="modal-content MarginModal">
+      <div class="modal-header CardBlueBG">
+        <h5 class="modal-title CardBlueBG" id="exampleModalLabel">Cheque Payment</h5>
+        <button type="button" id="close-cheque-modal" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ModalPadding payment-modal-body">
+        <form action="" [formGroup]="jobForm">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="card-title">First Name</label>
+              <input class="card-text SelectDiv payment-modal-input" placeholder="Enter First Name" formControlName="paymentFirstName">
+            </div>
+            <div class="col-lg-6">
+              <label class="card-title">Last Name</label>
+              <input class="card-text SelectDiv payment-modal-input" placeholder="Enter Last Name" formControlName="paymentLastName">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-lg-12">
+              <label class="card-title">Cheque Amount</label>
+              <input class="card-text SelectDiv payment-modal-input" placeholder="Enter Cheque Amount" formControlName="paymentChequeAmount">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-lg-12">
+              <label class="card-title">Cheque Number</label>
+              <input class="card-text SelectDiv payment-modal-input" placeholder="Enter Cheque Number" formControlName="paymentChequeNumber">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-lg-12">
+              <label class="card-title">Cheque Image</label>
+              <input class="form-control border border-primary" type="file" id="formFile" (change)="uploadFile($event)">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-lg-12">
+              <button type="button" class="btn btn-primary w-100" (click)="closeChequeModal()">Next</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Cheque Payment Modal end-->
+
+<!-- Card Payment Modal start-->
+<div class="modal fade" id="CardPaymentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="CardPaymentModal" aria-hidden="true">
+    <div class="modal-dialog payment-modal-dialog">
+        <div class="modal-content MarginModal">
+            <div class="modal-header CardBlueBG">
+                <h5 class="modal-title CardBlueBG" id="exampleModalLabel">Credit Card Payment</h5>
+                <button id="close-card-modal" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body ModalPadding payment-modal-body">
+              <div class="row">
+                <button class="accordion-button inDisplay" data-bs-toggle="collapse" data-bs-target="#collapseCardPayment" aria-expanded="true" aria-controls="collapseCardPayment"> Virtual Card </button>
+                <button class="accordion-button collapsed inDisplay" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSendInvoice" aria-expanded="false" aria-controls="collapseSendInvoice"> Send Invoice </button>
+              </div>
+              <div class="accordion mt-4" id="accordionPayment">
+                <form class="FormMargin" >
+                  <div class="accordion-item">
+                    <div id="collapseCardPayment" class="accordion-collapse collapse show" aria-labelledby="headinCardPayment" data-bs-parent="#accordionPayment">
+                      <div class="accordion-body">
+                        <form action="">
+                          <div class="row" [formGroup]="jobForm">
+                              <div class="col-lg-12">
+                                  <p class="mb-0">Total Amount</p>
+                                  <p class="mb-0">{{this.totalAmount | currency}}</p>
+                                  <label class="card-title">Amount to be charged</label>
+                                  <input class="card-text SelectDiv payment-modal-input" formControlName="paymentAmount" maxlength="16" placeholder="Enter Amount">
+                              </div>
+                          </div>
+                          <div class="row mt-3" [formGroup]="jobForm">
+                              <div class="col-lg-6">
+                                  <label class="card-title">First Name</label>
+                                  <input class="card-text SelectDiv payment-modal-input" placeholder="Enter First Name" formControlName="paymentFirstName">
+                              </div>
+                              <div class="col-lg-6">
+                                  <label class="card-title">Last Name</label>
+                                  <input class="card-text SelectDiv payment-modal-input" placeholder="Enter Last Name" formControlName="paymentLastName">
+                              </div>
+                          </div>
+                          <div class="row mt-3" [formGroup]="cardForm">
+                              <div class="col-lg-12">
+                                  <label class="card-title">Card Number</label>
+                                  <input class="card-text SelectDiv payment-modal-input" formControlName="ccNumber" maxlength="16" placeholder="XXXXXXXXXXXXXXXX" [ngClass]="{ 'is-invalid': f1['ccNumber'].errors  && (f1['ccNumber'].dirty || f1['ccNumber'].touched)}">
+                                  <div *ngIf="!f1['ccNumber'].valid && (f1['ccNumber'].dirty || f1['ccNumber'].touched)" class="invalid-feedback">
+                                    <div *ngIf="f1['ccNumber'].errors" class="alert alert-danger">Invalid Card Number.</div>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="row mt-3" [formGroup]="cardForm">
+                              <div class="col-lg-6">
+                                  <label class="card-title">Expiry Date</label>
+                                  <input class="card-text SelectDiv payment-modal-input" placeholder="MMYY" formControlName="ccExp">
+                              </div>
+                              <div class="col-lg-6">
+                                  <label class="card-title">CVV</label>
+                                  <input class="card-text SelectDiv payment-modal-input" formControlName="cvv" maxlength="3" placeholder="123" [ngClass]="{ 'is-invalid': f1['cvv'].errors  && (f1['cvv'].dirty || f1['cvv'].touched)}">
+                                  <div *ngIf="!f1['cvv'].valid && (f1['cvv'].dirty || f1['cvv'].touched)" class="invalid-feedback">
+                                    <div *ngIf="f1['cvv'].errors" class="alert alert-danger">Invalid Security Code.</div>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="row mt-3" [formGroup]="cardForm">
+                              <div class="col-lg-12">
+                                  <label class="card-title">Postal Code</label>
+                                  <input class="card-text SelectDiv payment-modal-input" placeholder="Enter Postal Code" formControlName="postalCode">
+                              </div>
+                          </div>
+                          <div class="row mt-3">
+                              <div class="col-lg-12">
+                                  <button type="button" class="btn btn-primary w-100" (click)="chargePayment()">Pay <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                              </div>
+                          </div>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="accordion-item">
+                    <div id="collapseSendInvoice" class="accordion-collapse collapse" aria-labelledby="headingSendInvoice" data-bs-parent="#accordionPayment">
+                      <div class="accordion-body">
+                        <form action="" [formGroup]="jobForm">
+                          <div class="row">
+                              <div class="col-lg-12">
+                                  <p class="mb-0">Payment Amount</p>
+                                  <p class="mb-0">{{this.totalAmount | currency}}</p>
+                              </div>
+                          </div>
+                          <div class="row mt-3">
+                            <div class="col-lg-6">
+                                <label class="card-title">First Name</label>
+                                <input class="card-text SelectDiv payment-modal-input" placeholder="Enter First Name" formControlName="paymentFirstName">
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="card-title">Last Name</label>
+                                <input class="card-text SelectDiv payment-modal-input" placeholder="Enter Last Name" formControlName="paymentLastName">
+                            </div>
+                        </div>
+                          <div class="row mt-3">
+                              <div class="col-lg-12">
+                                  <label class="card-title">Email</label>
+                                  <input class="card-text SelectDiv payment-modal-input" placeholder="Enter Email" formControlName="paymentEmail">
+                              </div>
+                          </div>
+                          <div class="row mt-3">
+                              <div class="col-lg-12">
+                                  <button type="button" class="btn btn-primary w-100" (click)="sendInvoice()">Send Invoice <span *ngIf="loader" class="spinner-border text-warning spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                              </div>
+                          </div>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Card Payment Modal end-->

@@ -1,0 +1,901 @@
+.CardFadeDiv {
+  background-color: #eff9ff;
+  height: 87vh;
+  overflow-y: scroll;
+  border: none;
+}
+
+.CardTitleDiv {
+  color: #133a61;
+  background-color: #daeffc;
+}
+
+.H1Div {
+  height: 82px;
+  padding-left: 48px;
+  font-weight: bold;
+}
+
+.CardBodyDiv {
+  padding-left: 48px;
+}
+
+.H1DivStyle {
+  color: #133a61;
+}
+
+.CardBG {
+  background-color: #eff9ff;
+}
+
+.CardBlueBG {
+  background-color: #24428C;
+  color: white;
+}
+
+.MarginModal{
+  margin-top: 20%
+}
+
+.WhiteText {
+  color: white;
+}
+
+.CardBGWhite {
+  background-color: white;
+}
+
+.txtArea {
+  border: none;
+  border-radius: 4px;
+}
+
+.ColDiv4 {
+  border-radius: 11px 0px 0px 0px;
+}
+
+.ColDivEnd {
+  border-radius: 11px 0px 0px 0px;
+  align-items: end;
+}
+
+.ButtonBG {
+  background-color: #daeffc;
+}
+
+.SelectDiv {
+  background-color: #F2FAFF;
+  width: 100%;
+}
+
+.SelectBlue {
+  background-color: #24428C;
+  width: 100%;
+}
+
+.CardBG {
+  background-color: #F2FAFF;
+}
+
+.ButtonStyle {
+  border: none;
+  background-color: #A50E10 !important;
+}
+
+.DivCard {
+  display: inline-flex;
+  float: right;
+}
+
+.ButtonRadius {
+  border-radius: 20px;
+}
+
+.TextAreaDiv {
+  background-color: #eff9ff;
+  border: none;
+}
+
+.ButtonCol12 {
+  float: right;
+  border-radius: 20px;
+}
+
+.warning {
+  color: white !important;
+}
+
+.ModalButton {
+  float: left;
+  border-radius: 20px;
+}
+
+.input-group-text {
+  border: none;
+  background-color: #EFF9FF;
+  color: #133a61;
+}
+
+.form-control {
+  border: none;
+}
+
+.SpanColor {
+  background-color: #E5F5FF;
+}
+
+.PGDiv {
+  background-color: #eff9ff;
+}
+
+.form-control-padding {
+  padding: 0px !important;
+}
+
+.Container-Div {
+  background-color: #F7FCFF;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 10px;
+  max-height: 87vh;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+h2,
+h6,
+h5 {
+  color: #24428C;
+}
+
+h4 {
+  color: white;
+}
+
+.Lead-Info {
+  background-color: #24428C;
+  width: 108%;
+  margin-left: -4%;
+}
+
+.LeadHeading {
+  margin-left: 4.2%;
+}
+
+.PhoneNumber,
+#PhoneP,
+#Phone {
+  display: inline;
+}
+
+#PhoneP {
+  color: #24428C
+}
+
+.bi {
+  color: #24428C;
+}
+
+#EmailP,
+#Email {
+  display: inline;
+}
+
+#EmailP {
+  color: #24428C
+}
+
+.in-Display{
+  display: inline !important;
+}
+
+#LocationP,
+#Location {
+  display: inline;
+}
+
+#LocationP {
+  color: #24428C
+}
+
+.ColPortion {
+  padding-left: 2%;
+}
+
+.cursor-arc {
+  cursor: pointer;
+}
+
+svg:hover {
+  filter: drop-shadow(0px 0px 7px rgb(0 0 0 / 0.5));
+}
+
+.bi {
+  color: #24428C;
+
+}
+
+.bi:hover {
+  color: #0E3358;
+}
+
+.SAgentDiv {
+  background-color: #4b5fdf !important;
+}
+
+.PAgentDiv,
+.SAgentDiv {
+  background-color: #24428C;
+  font-size: small;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.PAgentP,
+.SAgentP {
+  color: white;
+}
+
+.SAgent,
+.PAgent {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.RowTop {
+  margin-top: -10%;
+}
+
+.TAmount,
+.TAmountP {
+  display: inline;
+  color: #24428C;
+}
+
+.TAmount {
+  font-size: larger;
+  font-weight: lighter;
+}
+
+.StatusH {
+  text-align: end !important;
+  font-size: larger;
+  font-weight: lighter;
+}
+
+.ColMargin {
+  margin-top: -1%;
+}
+
+.card-Border {
+  border: 1px solid #24428C;
+  border-radius: 5px;
+}
+
+.cardInput {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #24428C;
+  border-radius: 0px;
+}
+
+.cardBlue {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #24428C;
+  border-radius: 0px;
+  color: white;
+}
+
+.FontSmall {
+  font-size: small;
+}
+
+.twoCard {
+  display: flex;
+}
+
+.cardPart {
+  width: 100%;
+  padding: 2px;
+}
+
+.cardPart2 {
+  border-left: 1px solid #ccc;
+}
+
+.RowWidth {
+  width: 110%;
+}
+
+.BtnCol {
+  width: 30px;
+}
+
+.FormMargin {
+  margin-left: -2%;
+}
+
+.Col-Width {
+  width: 13%;
+}
+
+.RateWidth {
+  width: 12%;
+}
+
+.Row-Width {
+  width: 106.5%;
+  ;
+}
+
+.JobMargin {
+  margin-left: 35%;
+}
+
+/* Accordian CSS */
+.accordion-button {
+  width: 20%;
+}
+
+.inDisplay {
+  display: inline;
+  text-align: center;
+}
+
+.AccordianDivButtons {
+  border: 2px solid;
+  border-radius: 30px;
+  background: white;
+  padding: 5px;
+}
+
+.SelectBGAddress{
+  background-color: #F7FCFF;
+}
+
+.LinkColor{
+  color: #1A0EAB;
+  cursor: pointer;
+}
+
+.accordion-button {
+  border-radius: 30px;
+  background-color: white;
+}
+
+.ModalPadding{
+  padding: 5%;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #F7FCFF;
+  height: 6vh;
+  background-color: #24428C !important;
+}
+
+.accordion-button:active {
+  color: #F7FCFF;
+  background-color: #24428C !important;
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+}
+
+.ACDiv {
+  border-top: 1px solid #24428C;
+  width: 108%;
+}
+
+.accordion-item {
+  border: none;
+  margin-top: 2%;
+  background-color: #F7FCFF;
+}
+
+.CancelBTN {
+  background-color: #F2FAFF;
+  color: #24428C;
+  border-radius: 30px;
+  border: 1px solid #24428C;
+}
+
+.CancelBTN:hover {
+  background-color: white !important;
+  color: #24428C;
+  border-radius: 30px;
+  border: 1px solid #24428C;
+}
+
+.NextBTN {
+  background-color: #24428C;
+  color: white;
+  border-radius: 30px;
+}
+
+.PaddingZero {
+  padding: 0%;
+}
+
+.BlueBorder {
+  background-color: #F2FAFF;
+  border: 1px solid #24428C;
+}
+
+.BlueInput {
+  background-color: #F2FAFF;
+}
+
+.DivHeight {
+  height: 10vh;
+}
+
+/* Accordian CSS End */
+
+/* Switch CSS */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 25px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #24428C;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #24428C;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Toggle Switch */
+/*switch styles*/
+
+div.btn-container {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+div.btn-container i {
+  display: inline-block;
+  position: relative;
+  top: -9px;
+}
+
+.switch {
+  font-size: 13px;
+  color: #424242;
+  font-weight: 500;
+}
+
+.btn-color-mode-switch {
+  display: inline-block;
+  margin: 0px;
+  position: relative;
+}
+
+.btn-color-mode-switch>label.btn-color-mode-switch-inner {
+  margin: 0px;
+  width: 150px;
+  height: 40px;
+  background: #F2FAFF;
+  border-radius: 26px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  /*box-shadow: 0px 0px 8px 0px rgba(17, 17, 17, 0.34) inset;*/
+  display: block;
+}
+
+.btn-color-mode-switch>label.btn-color-mode-switch-inner:before {
+  content: attr(data-on);
+  position: absolute;
+  font-size: 12px;
+  font-weight: 500;
+  top: 10px;
+  right: 20px;
+
+}
+
+.btn-color-mode-switch>label.btn-color-mode-switch-inner:after {
+  content: attr(data-off);
+  width: 70px;
+  height: 36px;
+  background: #24428C;
+  color: white;
+  border-radius: 26px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0px 0px 6px -2px #111;
+  padding: 5px 0px;
+}
+
+.btn-color-mode-switch>.alert {
+  display: none;
+  background: #FF9800;
+  border: none;
+  color: #fff;
+}
+
+.btn-color-mode-switch input[type="checkbox"] {
+  cursor: pointer;
+  width: 50px;
+  height: 25px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  margin: 0px;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner {
+  background: #151515;
+  color: #fff;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner:after {
+  content: attr(data-on);
+  left: 78px;
+  background: #F2FAFF;
+  color: #24428C
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner:before {
+  content: attr(data-off);
+  right: auto;
+  left: 20px;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner {
+  background: #24428C;
+  color: #F2FAFF;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked~.alert {
+  display: block;
+}
+
+p.by a {
+  text-decoration: none;
+  color: #000;
+}
+
+.dark-preview p.by a {
+  color: #777;
+}
+
+.white-preview p.by a {
+  color: #000;
+}
+
+/* Toggle Swicth End */
+
+
+/* Switch 4 Specific Style Start */
+
+.box_4 {
+  background: #eee;
+}
+
+.input_wrapper {
+  width: 80px;
+  height: 40px;
+  position: relative;
+  cursor: pointer;
+}
+
+.input_wrapper input[type="checkbox"] {
+  width: 95px;
+  height: 28px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #24428C;
+  border-radius: 2px;
+  position: relative;
+  outline: 0;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.input_wrapper input[type="checkbox"]:after {
+  position: absolute;
+  content: "";
+  top: 3px;
+  left: 3px;
+  width: 34px;
+  height: 22px;
+  background: #F2FAFF;
+  z-index: 2;
+  border-radius: 2px;
+  -webkit-transition: all .35s;
+  transition: all .35s;
+}
+
+.input_wrapper svg {
+  position: absolute;
+  top: 30%;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  fill: #fff;
+  -webkit-transition: all .35s;
+  transition: all .35s;
+  z-index: 1;
+}
+
+.input_wrapper .is_checked {
+  width: 18px;
+  left: 18%;
+  -webkit-transform: translateX(190%) translateY(-30%) scale(0);
+  transform: translateX(190%) translateY(-30%) scale(0);
+}
+
+.input_wrapper .is_unchecked {
+  width: 15px;
+  right: 10%;
+  -webkit-transform: translateX(0) translateY(-30%) scale(1);
+  transform: translateX(0) translateY(-30%) scale(1);
+}
+
+/* Checked State */
+.input_wrapper input[type="checkbox"]:checked {
+  background: #23da87;
+}
+
+.input_wrapper input[type="checkbox"]:checked:after {
+  left: calc(100% - 37px);
+}
+
+.input_wrapper input[type="checkbox"]:checked+.is_checked {
+  -webkit-transform: translateX(0) translateY(-30%) scale(1);
+  transform: translateX(0) translateY(-30%) scale(1);
+}
+
+.input_wrapper input[type="checkbox"]:checked~.is_unchecked {
+  -webkit-transform: translateX(-190%) translateY(-30%) scale(0);
+  transform: translateX(-190%) translateY(-30%) scale(0);
+}
+
+/* Switch 4 Specific Style End */
+
+ngx-dropzone{
+  border: none;
+  background-color: #F2FAFF;
+  height: 130px !important;
+}
+
+.payment-modal-dialog {
+  max-width: 35%;
+}
+
+.payment-modal-input {
+  border: 1px solid #133a61;
+  border-radius: 5px;
+}
+
+.ModalPadding{
+  padding: 5%;
+}
+
+.payment-modal-body {
+  background-color: #eff9ff;
+}
+
+.circularLoaderDupJob {
+  height: 50px;
+  width: 50px;
+  margin-top: 25%;
+  opacity: 1;
+  background-color: transparent;
+  border: 5px solid #f3f3f3;
+  /* Light grey */
+  border-top: 5px solid #0D3256;
+  border-radius: 50%;
+}
+
+@media (min-width: 1920px) {
+  .accordion-button:not(.collapsed) {
+    color: #F7FCFF;
+    height: 5vh;
+    background-color: #24428C !important;
+  }
+
+  .ColPortion {
+    padding-left: 1.4%;
+  }
+
+  .LeadHeading {
+    margin-left: 4%;
+  }
+
+  .DivHeight {
+    height: 8vh;
+  }
+
+  .Row-Width {
+    width: 107.2%;
+  }
+
+  .JobMargin {
+    margin-left: 48%;
+  }
+
+  .Margin-Left {
+    margin-left: 18%;
+  }
+
+  /* Toggle Switch */
+  /*switch styles*/
+
+  div.btn-container {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  div.btn-container i {
+    display: inline-block;
+    position: relative;
+    top: -9px;
+  }
+
+  .switch {
+    font-size: 13px;
+    color: #424242;
+    font-weight: 500;
+  }
+
+  .btn-color-mode-switch {
+    display: inline-block;
+    margin: 0px;
+    position: relative;
+  }
+
+  .btn-color-mode-switch>label.btn-color-mode-switch-inner {
+    margin: 0px;
+    width: 150px;
+    height: 35px;
+    background: #F2FAFF;
+    border-radius: 26px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    /*box-shadow: 0px 0px 8px 0px rgba(17, 17, 17, 0.34) inset;*/
+    display: block;
+  }
+
+  .btn-color-mode-switch>label.btn-color-mode-switch-inner:before {
+    content: attr(data-on);
+    position: absolute;
+    font-size: 12px;
+    font-weight: 500;
+    top: 10px;
+    right: 20px;
+
+  }
+
+  .btn-color-mode-switch>label.btn-color-mode-switch-inner:after {
+    content: attr(data-off);
+    width: 70px;
+    height: 31px;
+    background: #24428C;
+    color: white;
+    border-radius: 26px;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0px 0px 6px -2px #111;
+    padding: 5px 0px;
+  }
+
+  .btn-color-mode-switch>.alert {
+    display: none;
+    background: #FF9800;
+    border: none;
+    color: #fff;
+  }
+
+  .btn-color-mode-switch input[type="checkbox"] {
+    cursor: pointer;
+    width: 50px;
+    height: 25px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    margin: 0px;
+  }
+
+  .btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner {
+    background: #151515;
+    color: #fff;
+  }
+
+  .btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner:after {
+    content: attr(data-on);
+    left: 78px;
+    background: #F2FAFF;
+    color: #24428C
+  }
+
+  .btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner:before {
+    content: attr(data-off);
+    right: auto;
+    left: 20px;
+  }
+
+  .btn-color-mode-switch input[type="checkbox"]:checked+label.btn-color-mode-switch-inner {
+    background: #24428C;
+    color: #F2FAFF;
+  }
+
+  .btn-color-mode-switch input[type="checkbox"]:checked~.alert {
+    display: block;
+  }
+
+  p.by a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .dark-preview p.by a {
+    color: #777;
+  }
+
+  .white-preview p.by a {
+    color: #000;
+  }
+
+  /* Toggle Swicth End */
+
+}

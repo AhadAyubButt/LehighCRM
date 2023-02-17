@@ -1,0 +1,107 @@
+.img-thumbnail {
+  border-radius: 50%;
+  border-left-color: #F7B59D;
+  border-right-color: #A2B3CF;
+  border-top-color: #F7B59D;
+  border-bottom-color: #A2B3CF;
+  /* border-top-color: #d74224;
+  border-bottom-color: #11266e;
+  border-left-color: #d74224;
+  border-right-color: #11266e; */
+}
+
+.img-thumbnail:hover {
+  transition: opacity 200ms ease-in;
+  border-radius: 50%;
+}
+
+ul {
+  z-index: 9999;
+  position: absolute;
+  background-color: white;
+  margin-top: 40px;
+  list-style: none;
+  width: 150%;
+  min-width: auto;
+  line-height: 30px;
+}
+
+.grow:hover {
+  transform: scale(1.2);
+  transition: all .6s ease-in-out;
+}
+
+.FormStyle {
+  width: 34%;
+  margin-left: 20px;
+  border-radius: 20px;
+  border-left-color: #F7B59D;
+  border-right-color: #A2B3CF;
+  border-top-color: #F7B59D;
+  border-bottom-color: #A2B3CF;
+  /* border-top-color: #d74224;
+  border-bottom-color: #11266e;
+  border-left-color: #d74224;
+  border-right-color: #11266e; */
+}
+
+.navbar {
+  height: 10vh !important;
+}
+
+.SpanTopNav {
+  margin-right: 10px;
+  font-size: 18px;
+  color: #0b2f53;
+}
+
+.ImgTag {
+  width: 40px;
+}
+
+.ImgTagDiv {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%
+}
+
+.DMDiv {
+  width: 130px;
+}
+
+.NotificationDiv {
+  border: radius 50px;
+}
+
+.SpanWhite {
+  color: white;
+}
+
+.DropDownDiv {
+  background-color: white;
+  min-width: 290px;
+  margin-top: 10px;
+  max-height: 48vh;
+  min-height: 18vh;
+  overflow: auto;
+}
+
+.DropDownItemDiv h3 {
+  color: lightseagreen;
+  font-size: 18px !important;
+}
+
+.DropDownItemDiv .titleP{
+  color: #f9bc01;
+}
+
+.DropDownItemDiv .dateP{
+  margin-top: -42px; 
+  margin-left: 56px; 
+  color: #02a4e4; 
+  font-size: small;
+}
+
+.dropdown-divider{
+  color: white;
+}

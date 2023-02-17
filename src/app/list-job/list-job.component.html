@@ -1,0 +1,289 @@
+<div class="container">
+  <div class="container-fluid">
+
+    <div class="row ContentRow">
+      <div class="col-lg-3">
+        <select class="form-select FilterSearch" [formControl]="FilterJobs">
+          <option value="All" selected>All</option>
+          <option value="Sales">Sales</option>
+          <option value="Quote">Quote</option>
+        </select>
+      </div>
+      <div class="col-lg-2 MarginButtonCol">
+        <button class="btn btn-primary" (click)="FilterJobsByType()">Filter</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 mb-3">
+        <button class="btn btn-primary btn-md col-2 mr-2" data-bs-toggle="modal" data-bs-target="#JobModal">
+          Create a New Job
+        </button>
+      </div>
+    </div>
+    <ng-template #loading>
+      <div class="d-flex flex-row justify-content-center NGDiv">
+        <div class="circularLoaderList" [@load]="TempListJobs ? 'done' : 'load'"></div>
+      </div>
+    </ng-template>
+
+    <div class="Container-Div shadow" *ngIf="TempListJobs; else loading">
+      <span class="mb-3">
+        <h4 class="ms-2 mb-3 JobsLength me-2" *ngIf="TempListJobs.length > 0; else load">Jobs</h4>
+        <h6 class="JobsLength">({{TempListJobs.length}})</h6>
+      </span>
+      <div class="card mt-3 mb-3 overlayCard" *ngFor="let job of TempListJobs; let i = index;">
+        <div class="card-body">
+          <img class="rounded-circle" alt="100x100" height="30" width="30" src="../assets/user.png"
+            data-holder-rendered="true">
+          <h5 class="card-title">
+            {{job.JobData.leadName}}
+          </h5>
+
+          <div id="TimeDivID">
+            <h6 id="CreateDate">Created Date: </h6>
+            <p>{{job.JobData.JobInfo.jobDate}}</p>
+          </div>
+          <!-- <p>{{job.JobData.JobID}}</p> -->
+          <div class="ArchiveDiv ms-2" *ngIf="job.JobData.paymentStatus == 'Quote' && !job.ArchiveFlag">
+            <h6 class="ArchiveDiv">Add to Archive</h6>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-archive ms-1 ArchiveDiv Svg-Margin cursor-arc" viewBox="0 0 16 16" (click)="ArchiveJob(job)">
+              <path
+                d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+            </svg>
+          </div>
+          <div class="ArchiveDiv ms-2" *ngIf="job.JobData.paymentStatus == 'Quote' && job.ArchiveFlag">
+            <h6 class="ArchiveDiv">Archived</h6>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-archive-fill ms-1 ArchiveDiv Svg-Margin cursor-arc" viewBox="0 0 16 16" (click)="UnArchiveJob(job)">
+              <path
+                d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+            </svg>
+          </div>
+
+          <div class="Card-Body-Div mt-2">
+            <h6>Company: </h6>
+            <p>{{job.JobData.JobInfo.company}}</p>
+
+            <h6 class="ms-4">Service Type: </h6>
+            <p>{{job.JobData.JobInfo.salesType}}</p>
+
+            <h6 class="ms-4">Technician: </h6>
+            <p>{{job.JobData.JobInfo.technician}}</p>
+
+            <h6 class="ms-4">Job Type: </h6>
+            <p>{{job.JobData.paymentStatus}}</p>
+
+            <h6 class="ms-4">Total: </h6>
+            <p>{{job.JobData.total | currency }}</p>
+
+            <div id="PaymentDivIDPaid" class="d-flex justify-content-center containerbtn"
+              *ngIf="job.JobData.paymentStatusType == 'PAID'">
+              <button class="cta">
+                <i>
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="200px" width="30" height="30" viewBox="0 0 48 48"
+                    style=" fill:#000000; margin-top: -0.3%;">
+                    <path fill="#c8e6c9"
+                      d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z">
+                    </path>
+                    <path fill="#4caf50"
+                      d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z">
+                    </path>
+                  </svg>
+                </i>
+                <span class="button-text pt-1">Paid</span>
+              </button>
+            </div>
+
+            <div id="PaymentDivIDUnPaid" class="d-flex justify-content-center containerbtn"
+              *ngIf="job.JobData.paymentStatusType == 'UNPAID'">
+              <button class="cta">
+                <i>
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="26" viewBox="0 0 512 512"
+                    style=" fill:#000000; margin-top: -0.3%;">
+                    <path fill="#E04F5F"
+                      d="M504.1,256C504.1,119,393,7.9,256,7.9C119,7.9,7.9,119,7.9,256C7.9,393,119,504.1,256,504.1C393,504.1,504.1,393,504.1,256z">
+                    </path>
+                    <path fill="#FFF"
+                      d="M285,256l72.5-84.2c7.9-9.2,6.9-23-2.3-31c-9.2-7.9-23-6.9-30.9,2.3L256,222.4l-68.2-79.2c-7.9-9.2-21.8-10.2-31-2.3c-9.2,7.9-10.2,21.8-2.3,31L227,256l-72.5,84.2c-7.9,9.2-6.9,23,2.3,31c4.1,3.6,9.2,5.3,14.3,5.3c6.2,0,12.3-2.6,16.6-7.6l68.2-79.2l68.2,79.2c4.3,5,10.5,7.6,16.6,7.6c5.1,0,10.2-1.7,14.3-5.3c9.2-7.9,10.2-21.8,2.3-31L285,256z">
+                    </path>
+                  </svg>
+                </i>
+                <span class="button-text">Un-Paid</span>
+              </button>
+            </div>
+
+            <!--  -->
+            <div id="PaymentDivIDUnPaid" class="d-flex justify-content-center containerbtn"
+            *ngIf="job.JobData.paymentStatusType == 'PARTIALLY PAID'">
+            <button class="cta">
+             
+                  
+              <i>
+                <svg style=" fill:white; margin-top: -0.3%;" xmlns="http://www.w3.org/2000/svg" width="25" height="26"  class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                  <path fill="#E04F5F"
+                   d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path fill="#FFF" d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                </svg>
+              </i>
+              <span class="button-text">Partially Paid</span>
+            </button>
+          </div>
+            <!--  -->
+
+            <div class="DuplicateDiv d-flex justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="34" height="28" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"  data-bs-toggle="modal" data-bs-target="#staticBackdropJob" (click)="dupJobBtn(job)">
+                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                <title>Duplicate Job</title>
+              </svg>
+            </div>
+
+            <div class="TimeDiv d-flex justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash"
+                viewBox="0 0 16 16" (click)="deleteJob(job)">
+                <path
+                  d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                <path fill-rule="evenodd"
+                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                  <title>Delete Job</title>
+              </svg>
+            </div>
+
+            <div class="EditDiv d-flex justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                class="bi bi-pencil-square mt-3 p-1" viewBox="0 0 16 16" (click)="getJob(job)">
+                <path
+                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                <path fill-rule="evenodd"
+                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                  <title>Edit Job</title>
+              </svg>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="JobModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Creating a New Job</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <button class="btn btn-primary btn-md col-4" data-bs-dismiss="modal" (click)="navigateNewCustomer()">
+              New Customer
+            </button>
+
+            <button class="btn btn-primary btn-md col-4 ms-2" (click)="navigateExistingCustomer()"
+              data-bs-dismiss="modal">
+              Exisiting Customer
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #load>
+      <div class="down">
+        <h4 class="ms-2 mb-3">Jobs</h4>
+        <h3 style="text-align: center">List is empty</h3>
+      </div>
+    </ng-template>
+    <!-- <div class="" *ngIf="TempListJobs; else loading">
+      <div class="" *ngIf="TempListJobs.length > 0; else load">
+        <div class="down fade-in"> -->
+    <!-- start page title -->
+    <!-- <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Lead Name</th>
+                <th scope="col">Company</th>
+                <th scope="col">Sales Type</th>
+                <th scope="col">Technician</th>
+                <th scope="col">Agent</th>
+                <th scope="col">Total Amount</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let job of TempListJobs; let i = index;">
+                <td>{{ i + 1}}</td>
+                <td>{{job.JobData.leadName}}</td>
+                <td>{{job.JobData.JobInfo.company}}</td>
+                <td>{{job.JobData.JobInfo.salesType}}</td>
+                <td>{{job.JobData.JobInfo.technician}}</td>
+                <td>{{job.JobData.JobInfo.secondaryAgent}}</td>
+                <td>{{job.JobData.total | currency }}</td>
+                <td>
+                  <button class="btn btn-primary btn-sm mr-3 me-1" (click)="getJob(job)">
+                    Edit Job
+                  </button>
+                  <button class="btn btn-primary btn-sm mr-3" (click)="deleteJob(job)">
+                    Delete Job
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
+    <!-- end row -->
+    <!-- </div>
+    </div> -->
+  </div>
+  <!-- container-fluid -->
+</div>
+<!-- End Page-content -->
+
+
+<!-- Select Customer Modal start -->
+<div class="modal fade" id="staticBackdropJob" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropJobLabel" aria-hidden="true">
+      <div class="modal-dialog mdb-2">
+        <div class="modal-content mod">
+          <div class="modal-header modhead">
+            <h5 class="modal-title modtitle">Select Customer</h5>
+            <button type="button" class="btn-close btn-close-white" id="closeModal" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="card mb-3 overlayCard" *ngFor="let customer of ListCustomer; let i = index;">
+              <div class="card-body" (click)="duplicateJob(customer)">
+                <img class="rounded-circle" alt="100x100" height="30" width="30" src="../assets/user.png"
+                  data-holder-rendered="true">
+                <h5 class="card-title cardColor">
+                  {{customer.CustomerData.firstName}} {{customer.CustomerData.lastName}}
+                </h5>
+
+                <div class="Card-Body-Div mt-2">
+                  <h6>CID: </h6>
+                  <p>{{customer.CustomerData.customerID}}</p>
+
+                  <h6 class="ms-4">Email: </h6>
+                  <p>{{customer.CustomerData.email}}</p>
+
+                  <h6 class="ms-4">Phone: </h6>
+                  <p>{{customer.CustomerData.phone}}</p>
+
+                  <h6 class="ms-4">Company: </h6>
+                  <p>{{customer.CustomerData.companyName}}</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Select Customer Modal end -->

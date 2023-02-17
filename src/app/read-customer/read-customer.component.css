@@ -1,0 +1,256 @@
+.ContainerDiv {
+  height: 100%
+}
+
+.CardFadeDiv {
+  background-color: #EFF9FF;
+  height: 88vh;
+  border: none;
+}
+
+.CardBodyDiv {
+  height: 100%;
+  overflow: scroll;
+}
+
+.HeadingDiv {
+  color: #133a61;
+}
+
+.CardBodyBG {
+  background-color: #EFF9FF;
+  background-color: white !important;
+}
+
+.ButtonStyle {
+  margin: 5px 0px 10px 10px;
+  border-radius: 20px;
+}
+
+.ColDiv12 {
+  border-radius: 11px 0px 0px 0px
+}
+
+.ColDivEnd {
+  border-radius: 11px 0px 0px 0px;
+  align-items: end
+}
+
+.bounce {
+  display: inline-block;
+  position: relative;
+  -moz-animation: bounce 0.5s infinite linear;
+  -o-animation: bounce 0.5s infinite linear;
+  -webkit-animation: bounce 0.5s infinite linear;
+  animation: bounce 0.5s infinite linear;
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    top: 0;
+  }
+
+  50% {
+    top: -0.2em;
+  }
+
+  70% {
+    top: -0.3em;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+@-moz-keyframes bounce {
+  0% {
+    top: 0;
+  }
+
+  50% {
+    top: -0.2em;
+  }
+
+  70% {
+    top: -0.3em;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+@-o-keyframes bounce {
+  0% {
+    top: 0;
+  }
+
+  50% {
+    top: -0.2em;
+  }
+
+  70% {
+    top: -0.3em;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+@-ms-keyframes bounce {
+  0% {
+    top: 0;
+  }
+
+  50% {
+    top: -0.2em;
+  }
+
+  70% {
+    top: -0.3em;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    top: 0;
+  }
+
+  50% {
+    top: -0.2em;
+  }
+
+  70% {
+    top: -0.3em;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+.bi::before {
+  font-weight: bold !important;
+}
+
+.invalid-feedback {
+  position: absolute;
+  display: inline-block;
+  margin-left: -4%;
+  width: 100%;
+  margin-top: -17%;
+}
+
+.is-invalid {
+  border: 1px solid red !important;
+
+}
+
+
+.Container-Div {
+  background-color: #F7FCFF;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 10px;
+  max-height: 87vh;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+h2,
+h6,
+h5 {
+  color: #24428C;
+}
+
+h4 {
+  color: white;
+}
+
+.Lead-Info {
+  background-color: #24428C;
+  width: 108%;
+  margin-left: -4%;
+}
+
+.LeadHeading {
+  margin-left: 4.2%;
+}
+
+.card-Border {
+  border: 1px solid #24428C;
+  border-radius: 5px;
+}
+
+.cardInput {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #24428C;
+  border-radius: 0px;
+}
+
+.cardBlue {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #24428C;
+  border-radius: 0px;
+  color: white !important;
+}
+
+.CardBG {
+  background-color: #eff9ff;
+}
+
+.CardBlueBG {
+  background-color: #24428C;
+  color: white;
+}
+
+.SelectDiv {
+  background-color: #F2FAFF;
+  width: 100%;
+}
+
+.SelectBlue {
+  background-color: #24428C;
+  width: 100%;
+  color: white;
+}
+
+.SelectBlue::placeholder {
+  color: lightgrey;
+}
+
+.WhiteText {
+  color: white;
+}
+
+.CancelBTN {
+  background-color: #F2FAFF;
+  color: #24428C;
+  border-radius: 30px;
+  border: 1px solid #24428C;
+}
+
+.CancelBTN:hover {
+  background-color: white !important;
+  color: #24428C;
+  border-radius: 30px;
+  border: 1px solid #24428C;
+}
+
+.NextBTN {
+  background-color: #24428C;
+  color: white;
+  border-radius: 30px;
+}

@@ -1,0 +1,30 @@
+<div class="containerDiv" id="containerDiv">
+  <div class="row login-row" id="login-row">
+    <div class="col-lg-4 h-100 d-flex align-items-center justify-content-center" id="main-banner-area">
+      <amplify-authenticator initialState="signIn" [loginMechanisms]="['username', 'email', 'phone_number']">
+        <ng-template amplifySlot="header">
+          <div id="header" class="d-flex flex-column" style="padding: var(--amplify-space-large); margin-bottom: -10%;">
+            <img class="amplify-image" src="../assets/lehigh-logo.png" alt="">
+            <h2 class="mt-4 ms-2 login-heading">Welcome Back!</h2>
+            <p class="ms-2 login-p">Please login to your account.</p>
+          </div>
+        </ng-template>
+
+        
+        <ng-template amplifySlot="authenticated" let-user="user" let-signOut="signOut">
+          <router-outlet class="max-h-w">
+          </router-outlet>
+        </ng-template>
+      </amplify-authenticator>
+    </div>
+
+    <div class="col-lg-8 h-100 d-flex align-items-center justify-content-center" id="loginBanner">
+      <img class="h-100 w-100" src="../assets/hvac-banner.png" alt="">
+      <div class="banner-text">
+        <p style="margin-bottom: 0;">Meet the revolutionized <a href="https://lehighhvac.com/" target="_blank"  style="color: white; text-decoration: none;"><b>Lehigh HVAC.</b></a></p>
+        <p style="margin-bottom: 0;">More efficient than ever bofore and powered by <a href="https://stampasolutions.com/" target="_blank"  style="color: white; text-decoration: none;"><b>Stampa Solutions.</b></a></p>
+      </div>
+    </div>
+  </div>
+
+</div>
