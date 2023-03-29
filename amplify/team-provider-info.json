@@ -1,0 +1,35 @@
+{
+  "production": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-lehighcrm-production-142428-authRole",
+      "UnauthRoleArn": "arn:aws:iam::754530496516:role/amplify-lehighcrm-production-142428-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::754530496516:role/amplify-lehighcrm-production-142428-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-lehighcrm-production-142428-deployment",
+      "UnauthRoleName": "amplify-lehighcrm-production-142428-unauthRole",
+      "StackName": "amplify-lehighcrm-production-142428",
+      "StackId": "arn:aws:cloudformation:us-west-2:754530496516:stack/amplify-lehighcrm-production-142428/efe177f0-8da3-11ed-9039-0a8e94f5cbdb",
+      "AmplifyAppId": "d1tvmakpo287u7"
+    },
+    "categories": {
+      "auth": {
+        "lehighcrma6c80c49": {}
+      },
+      "function": {
+        "LehighCRMPayment": {
+          "deploymentBucketName": "amplify-lehighcrm-production-142428-deployment",
+          "s3Key": "amplify-builds/LehighCRMPayment-2b424544424247564542-build.zip"
+        },
+        "LehighCRMSchedule": {
+          "deploymentBucketName": "amplify-lehighcrm-production-142428-deployment",
+          "s3Key": "amplify-builds/LehighCRMSchedule-43743938755067676f58-build.zip"
+        },
+        "LehighCRMFunction": {}
+      },
+      "storage": {
+        "LehighCRMTable": {},
+        "s": {}
+      }
+    }
+  }
+}

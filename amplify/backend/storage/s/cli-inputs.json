@@ -1,0 +1,14 @@
+{
+  "resourceName": "s",
+  "policyUUID": "88826ad9",
+  "bucketName": "lehighcrm48b3c3ae7fa34b71b161a28e3ee7a50f",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

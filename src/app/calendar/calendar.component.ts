@@ -130,7 +130,8 @@ export class CalendarComponent implements OnInit {
       lastName: [''],
       total: [''],
       jobID: [''],
-      jobSK: ['']
+      jobSK: [''],
+      company: ['']
     });
 
     if (this.router.getCurrentNavigation()?.extras!.state) {
@@ -142,7 +143,8 @@ export class CalendarComponent implements OnInit {
       this.form.controls['total'].setValue(this.jobInfo.total);
       this.form.controls['jobID'].setValue(this.jobInfo.JobID);
       this.form.controls['jobSK'].setValue(this.jobInfo.SK);
-
+      this.form.controls['company'].setValue(this.jobInfo.JobInfo.company);
+      
     }
 
     // @ts-ignore
@@ -386,6 +388,7 @@ export class CalendarComponent implements OnInit {
     this.form.controls['total'].setValue(job.JobData.total);
     this.form.controls['jobID'].setValue(job.JobData.JobID);
     this.form.controls['jobSK'].setValue(job.SK);
+    this.form.controls['company'].setValue(job.JobData.JobInfo.company);
 
 
     job.JobData.ProductPayment.forEach((v:any) => {
